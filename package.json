@@ -1,5 +1,5 @@
 {
-    "name": "@albert118/smart-app-banner",
+    "name": "smart-app-banner",
     "shortName": "Smart App Banner",
     "description": "A Smart App Banner for promoting mobile app installs based on the Safari Apple Experience. Includes support for Safari too.",
     "homepage": "https://github.com/albert118/smart-app-banner/",
