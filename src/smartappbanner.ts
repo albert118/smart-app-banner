@@ -29,7 +29,6 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     constructor(options: SmartBannerOptions) {
         super();
 
-        this.__registeredEventListeners = [];
         this.options = getSmartAppBannerOptions(options);
         this.platform = getCurrentPlatform();
 
