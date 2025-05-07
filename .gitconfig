@@ -1,0 +1,23 @@
+# Repo-wide Git configuration
+# Apply locally by running:
+# git config --local --replace-all include.path ../.gitconfig
+
+[core]
+    # ignore changes in file mode (useful to ensure Linux file mode isn't overwritten on Windows)
+    fileMode = false
+    # ignore casing in file names (useful to avoid Windows vs. Linux naming discrepancies)
+    ignoreCase = true
+    # DO store line endings in the repo as LF, but CLRF on disk
+    # let .gitattributes +  .editorconfig's figure out the specifics
+    autoCrlf = input
+    # avoid the warnings ("File will have LF  line endings in the repository but CRLF on disk")
+    safeCrlf = false
+[fetch]
+    # auto prune remotes
+    prune = true
+[push]
+    # avoid git push -u origin HEAD and instead just use git push
+    autoSetupRemote = true
+    # allow force updates only if the tip of the remote-tracking ref has been integrated locally
+    # this only has an effect if --force-with-lease argument is used
+    useForceIfIncludes = true
