@@ -19,6 +19,7 @@ export abstract class SmartAppBannerEvent extends TypedEvent<SmartAppBanner> {}
  */
 export class ReadyEvent extends SmartAppBannerEvent {
     static override readonly type = 'ready';
+    // @ts-ignore
     override type: 'ready';
 
     /** @internal */
@@ -32,6 +33,7 @@ export class ReadyEvent extends SmartAppBannerEvent {
  */
 export class DestroyedEvent extends SmartAppBannerEvent {
     static override readonly type = 'destroyed';
+    // @ts-ignore
     override type: 'destroyed';
 
     /** @internal */
@@ -45,6 +47,7 @@ export class DestroyedEvent extends SmartAppBannerEvent {
  */
 export class ClickedCallToAction extends SmartAppBannerEvent {
     static override readonly type = 'clicked-call-to-action';
+    // @ts-ignore
     override type: 'clicked-call-to-action';
 
     /** @internal */
