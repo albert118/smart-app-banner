@@ -35,7 +35,5 @@ npm-debug.log*
 .prettierignore
 CODEOWNERS
 
-# package lock files
-
+# package lock file
 package.*.json
-package.json
