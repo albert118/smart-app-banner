@@ -6,7 +6,7 @@ export abstract class TypedEvent<
     TTarget extends TypedEventTarget<any>,
 > extends Event {
     static readonly type: string;
-
+    // @ts-ignore
     override target: TTarget;
 
     constructor(type: string, cancelable = false) {
