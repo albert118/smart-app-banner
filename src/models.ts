@@ -19,7 +19,7 @@ export type SmartBannerOptions = {
      * @see https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners
      * @default ['android', 'ios']
      */
-    platforms: SupportedPlatForm[];
+    platforms?: SupportedPlatForm[];
 
     /**
      * The price tagline of the app, this can be any string you prefer.
