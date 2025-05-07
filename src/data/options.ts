@@ -8,20 +8,23 @@ import Logger from 'js-logger';
 
 /**
  * Default options
+ * Options which are required are omitted for brevity.
  */
-export const DEFAULT_OPTIONS: Required<ParsedSmartBannerOptions> = {
-    title: '',
-    author: '',
-    icon: '',
+export const DEFAULT_OPTIONS: Required<
+    Omit<ParsedSmartBannerOptions, 'title' | 'author'>
+> = {
+    icon: null,
     platforms: ['android', 'ios'],
-    price: 'free',
+    price: null,
     buttonLabel: 'View',
     verbose: false,
 
     // --------------------------------------------
     // Android Platform Options
-    playStoreUrl: null,
+    googlePlayStoreUrl: null,
     androidButtonLabel: null,
+    androidIcon: null,
+    androidPrice: '',
 
     // --------------------------------------------
     // Apple Platform Options
@@ -29,6 +32,8 @@ export const DEFAULT_OPTIONS: Required<ParsedSmartBannerOptions> = {
     appleAppId: null,
     appleAppArgumentUrl: null,
     appleButtonLabel: null,
+    appleIcon: null,
+    applePrice: '',
 };
 
 export const OPTION_PARSERS: OptionParsers<
@@ -50,30 +55,20 @@ export const OPTION_PARSERS: OptionParsers<
         return author;
     },
     icon: icon => {
-        if (icon.isFalsishOrEmpty()) {
-            throw new SmartAppBannerError('No icon has been configured.');
-        }
-
-        return icon;
+        if (icon?.isFalsishOrEmpty()) return null;
+        // this URL will be passed to the CSS URL function and might be a partial URL rather
+        // than a fully qualified URI (eg. a SPA asset), return it a simple string here.
+        // we have already asserted that the param is not undefined
+        return icon! as string;
     },
     platforms: (platforms, { defaultValue }) => {
         if (!platforms || platforms.length === 0) return defaultValue;
         return platforms;
     },
-    price: (price, { defaultValue }) => {
-        if (!price) {
-            return defaultValue;
-        } else if (typeof price === 'number' && price < 0) {
-            throw new SmartAppBannerError(
-                'An invalid price has been configured. Price should be non-negative.',
-            );
-        } else if (typeof price === 'number' && price === 0) {
-            throw new SmartAppBannerError(
-                'An invalid price has been configured. If price is configure as "0" then you should prefer the "free" option.',
-            );
-        }
-
-        return price;
+    price: price => {
+        if (price?.isFalsishOrEmpty()) return null;
+        // we have already asserted that the param is not undefined
+        return price!;
     },
     buttonLabel: (buttonLabel, { defaultValue }) => {
         if (buttonLabel?.isFalsishOrEmpty()) return defaultValue;
@@ -88,17 +83,17 @@ export const OPTION_PARSERS: OptionParsers<
     },
     // --------------------------------------------
     // Android Platform Options
-    playStoreUrl: (playStoreUrl, { rawOptions }) => {
+    googlePlayStoreUrl: (googlePlayStoreUrl, { rawOptions }) => {
         if (!rawOptions.platforms.includes('android')) return null;
 
-        const reason = `Android platform was enabled but no valid Google Play Store URL has been configured. Provided URL was "${playStoreUrl}"`;
-        if (playStoreUrl?.isFalsishOrEmpty()) {
+        const reason = `The Android platform was enabled but no valid Google Play Store URL has been configured. Provided URL was "${playStoreUrl}"`;
+        if (googlePlayStoreUrl?.isFalsishOrEmpty()) {
             throw new SmartAppBannerError(reason);
         }
 
         try {
             // we have already asserted that the param is not undefined
-            const x = new URL(playStoreUrl!);
+            const x = new URL(googlePlayStoreUrl!);
             return x;
         } catch (error) {
             throw new SmartAppBannerError(reason);
@@ -108,12 +103,25 @@ export const OPTION_PARSERS: OptionParsers<
         if (!rawOptions.platforms.includes('android')) return null;
         return androidButtonLabel ?? null;
     },
+    androidIcon: (androidIcon, { rawOptions }) => {
+        if (!rawOptions.platforms.includes('android')) return null;
+        if (
+            rawOptions.platforms.includes('android') &&
+            rawOptions.icon?.isFalsishOrEmpty() &&
+            androidIcon?.isFalsishOrEmpty()
+        ) {
+            throw new SmartAppBannerError(
+                'The Android platform was enabled but there is no icon defined at all',
+            );
+        }
+        return androidIcon ?? null;
+    },
     // --------------------------------------------
     // Apple Platform Options
     appStoreUrl: (appStoreUrl, { rawOptions }) => {
         if (!rawOptions.platforms.includes('ios')) return null;
 
-        const reason = `iOS platform was enabled but no valid Apple App Store URL has been configured. Provided URL was "${appStoreUrl}"`;
+        const reason = `The iOS platform was enabled but no valid Apple App Store URL has been configured. Provided URL was "${appStoreUrl}"`;
         if (appStoreUrl?.isFalsishOrEmpty()) {
             throw new SmartAppBannerError(reason);
         }
@@ -130,7 +138,7 @@ export const OPTION_PARSERS: OptionParsers<
 
         if (appleAppId?.isFalsishOrEmpty()) {
             throw new SmartAppBannerError(
-                `Safari platform was enabled but no valid Apple app ID has been configured. Provided app ID was "${appleAppId}"`,
+                `The Safari platform was enabled but no valid Apple app ID has been configured. Provided app ID was "${appleAppId}"`,
             );
         }
 
@@ -147,13 +155,26 @@ export const OPTION_PARSERS: OptionParsers<
             return new URL(appleAppArgumentUrl!);
         } catch (error) {
             throw new SmartAppBannerError(
-                `Safari platform was enabled but an invalid app argument URL was specified. Provided app argument URL was "${appleAppArgumentUrl}"`,
+                `The Safari platform was enabled but an invalid app argument URL was specified. Provided app argument URL was "${appleAppArgumentUrl}"`,
             );
         }
     },
     appleButtonLabel: (appleButtonLabel, { rawOptions }) => {
         if (!rawOptions.platforms.includes('ios')) return null;
         return appleButtonLabel ?? null;
+    },
+    appleIcon: (appleIcon, { rawOptions }) => {
+        if (!rawOptions.platforms.includes('ios')) return null;
+        if (
+            rawOptions.platforms.includes('ios') &&
+            rawOptions.icon?.isFalsishOrEmpty() &&
+            appleIcon?.isFalsishOrEmpty()
+        ) {
+            throw new SmartAppBannerError(
+                'The iOS platform was enabled but there is no icon defined at all',
+            );
+        }
+        return appleIcon ?? null;
     },
 };
 

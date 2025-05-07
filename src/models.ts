@@ -4,8 +4,11 @@ export type SmartBannerOptions = {
     title: string;
     author: string;
 
-    // TODO separate icons, button texts, etc.
-    icon: string;
+    /**
+     * The main asset to show. This should is expected to be a URL that resolves an image.
+     * This can be overriden on a per-platform basis as needed.
+     */
+    icon?: string;
 
     /**
      * Enabled platforms. If a platform is enabled here it must be configured.
@@ -19,9 +22,13 @@ export type SmartBannerOptions = {
     platforms: SupportedPlatForm[];
 
     /**
-     * The price of the app.
+     * The price tagline of the app, this can be any string you prefer.
+     * This can be overriden on a per-platform basis as needed. If not provided, then the platform
+     * specific options will be preferred.
+     *
+     * @default undefined (prefer platform specific by default)
      */
-    price: 'free' | number;
+    price?: string;
 
     /**
      * View button label. This can be overriden on a per-platform basis as needed.
@@ -44,12 +51,23 @@ export type SmartBannerOptions = {
      *
      * @example https://play-store-application-url
      */
-    playStoreUrl?: string;
+    googlePlayStoreUrl?: string;
 
     /**
      * Android specific button label. If not specified, falls back to buttonLabel.
      */
     androidButtonLabel?: string;
+
+    /**
+     * Android specific icon. This should is expected to be a URL that resolves an image.
+     */
+    androidIcon?: string;
+
+    /**
+     * Android specific price tagline.
+     * @default GET - On the Google Play Store
+     */
+    androidPrice?: string;
 
     // --------------------------------------------
     // Apple Platform Options
@@ -78,24 +96,37 @@ export type SmartBannerOptions = {
      * Apple specific button label. If not specified, falls back to buttonLabel.
      */
     appleButtonLabel?: string;
+
+    /**
+     * Apple specific icon. This should is expected to be a URL that resolves an image.
+     */
+    appleIcon?: string;
+
+    /**
+     * Apple specific price tagline.
+     * @default GET - On the App Store
+     */
+    applePrice?: string;
 };
 
 /**
  * Parsed Smart App Banner options
  */
-export type ParsedSmartBannerOptions = Omit<
-    SmartBannerOptions,
-    | 'playStoreUrl'
-    | 'appStoreUrl'
-    | 'appleAppArgumentUrl'
-    | 'androidButtonLabel'
-    | 'appleAppId'
-    | 'appleButtonLabel'
-> & {
+export type ParsedSmartBannerOptions = {
+    title: string;
+    author: string;
+    icon: string | null;
+    platforms: SupportedPlatForm[];
+    price: string | null;
+    buttonLabel: string;
+    verbose: boolean;
+
     // --------------------------------------------
     // Android Platform Options
-    playStoreUrl: URL | null;
+    googlePlayStoreUrl: URL | null;
     androidButtonLabel: string | null;
+    androidIcon: string | null;
+    androidPrice: string;
 
     // --------------------------------------------
     // Apple Platform Options
@@ -103,6 +134,8 @@ export type ParsedSmartBannerOptions = Omit<
     appleAppId: string | null;
     appleAppArgumentUrl: URL | null;
     appleButtonLabel: string | null;
+    appleIcon: string | null;
+    applePrice: string;
 };
 
 export class SmartAppBannerError extends Error {
