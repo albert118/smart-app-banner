@@ -38,6 +38,7 @@ export const DEFAULT_OPTIONS: Required<
 
 export const OPTION_PARSERS: OptionParsers<
     SmartBannerOptions,
+    // @ts-ignore
     ParsedSmartBannerOptions
 > = {
     title: title => {
@@ -86,7 +87,7 @@ export const OPTION_PARSERS: OptionParsers<
     googlePlayStoreUrl: (googlePlayStoreUrl, { rawOptions }) => {
         if (!rawOptions.platforms.includes('android')) return null;
 
-        const reason = `The Android platform was enabled but no valid Google Play Store URL has been configured. Provided URL was "${playStoreUrl}"`;
+        const reason = `The Android platform was enabled but no valid Google Play Store URL has been configured. Provided URL was "${googlePlayStoreUrl}"`;
         if (googlePlayStoreUrl?.isFalsishOrEmpty()) {
             throw new SmartAppBannerError(reason);
         }
@@ -183,5 +184,6 @@ export const OPTION_PARSERS: OptionParsers<
  */
 export const getSmartAppBannerOptions = getOptionsParser<
     SmartBannerOptions,
+    // @ts-ignore
     ParsedSmartBannerOptions
 >(DEFAULT_OPTIONS, OPTION_PARSERS);
