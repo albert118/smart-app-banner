@@ -1,5 +1,5 @@
 import Logger from 'js-logger';
-import * as events from './events';
+import * as events from './data/events';
 
 Logger.useDefaults({
     // default to warning until we disable it with options

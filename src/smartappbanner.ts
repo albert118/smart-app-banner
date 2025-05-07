@@ -1,5 +1,9 @@
 import { getSmartAppBannerOptions } from '@data/options';
-import { type SmartAppBannerEvents, DestroyedEvent, ReadyEvent } from '@events';
+import {
+    type SmartAppBannerEvents,
+    DestroyedEvent,
+    ReadyEvent,
+} from '@data/events';
 import { TypedEventTarget } from '@lib/TypedEventTarget';
 import {
     type ParsedSmartBannerOptions,
@@ -12,6 +16,10 @@ import Logger from 'js-logger';
 export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     readonly options: ParsedSmartBannerOptions;
     readonly platform: SupportedPlatForm;
+    readonly bannerId = 'smart-app-banner';
+
+    private __body: HTMLBodyElement | null = null;
+    private __bannerElement: HTMLElement | null = null;
 
     constructor(options: SmartBannerOptions) {
         super();
@@ -19,13 +27,35 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
         this.options = getSmartAppBannerOptions(options);
         this.platform = getCurrentPlatform();
 
-        this.dispatchEvent(new ReadyEvent());
         Logger.info('successfully initialised');
     }
 
+    // --------------------------------------------
+    // Lifecycle
+    mount() {
+        this.__body = document.querySelector('body');
+
+        if (!this.__body) {
+            Logger.error('Failed to mount (is the document ready yet?)');
+            return;
+        }
+
+        this.__bannerElement = document.createElement('div');
+        this.__bannerElement.outerHTML = this.html;
+        this.__bannerElement.id = this.bannerId;
+        this.__body.prepend(this.__bannerElement);
+
+        this.dispatchEvent(new ReadyEvent());
+    }
+
     destroy() {
+        if (!this.__bannerElement || !this.__body) return;
+        this.__body.removeChild(this.__bannerElement);
         this.dispatchEvent(new DestroyedEvent());
     }
+
+    // --------------------------------------------
+    // Event Handlers
 
     // --------------------------------------------
     // Getters

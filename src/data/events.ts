@@ -1,5 +1,5 @@
 import { TypedEvent } from '@lib/TypedEventTarget';
-import type { SmartAppBanner } from './smartappbanner';
+import type { SmartAppBanner } from '../smartappbanner';
 
 export type SmartAppBannerEvents = ReadyEvent | DestroyedEvent;
 
