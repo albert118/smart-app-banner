@@ -3,6 +3,7 @@ import tsconfig from './tsconfig.app.json';
 import path from 'path';
 import packageJson from './package.json';
 import dts from 'vite-plugin-dts';
+import stripComments from 'vite-plugin-strip-comments';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,6 +13,8 @@ export default defineConfig({
             rollupTypes: true,
             tsconfigPath: './tsconfig.app.json',
         }),
+        // https://github.com/thednp/vite-plugin-strip-comments
+        stripComments({ type: 'keep-legal' }),
     ],
     build: {
         lib: {
