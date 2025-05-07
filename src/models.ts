@@ -41,7 +41,7 @@ export type SmartBannerOptions = {
      *
      * @default false
      */
-    verbose: boolean;
+    verbose?: boolean;
 
     // --------------------------------------------
     // Android Platform Options

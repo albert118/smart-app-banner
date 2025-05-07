@@ -2,12 +2,12 @@ import type { ILogger } from 'js-logger';
 
 export function createDefaultLogger(): Partial<ILogger> {
     return {
-        trace: vi.fn(m => console.log(m)),
-        debug: vi.fn(m => console.log(m)),
-        info: vi.fn(m => console.log(m)),
-        log: vi.fn(m => console.log(m)),
-        warn: vi.fn(m => console.log(m)),
-        error: vi.fn(m => console.log(m)),
+        trace: vi.fn(),
+        debug: vi.fn(),
+        info: vi.fn(),
+        log: vi.fn(),
+        warn: vi.fn(),
+        error: vi.fn(),
         time: vi.fn(),
         timeEnd: vi.fn(),
         setLevel: vi.fn(),

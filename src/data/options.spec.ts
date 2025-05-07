@@ -1,9 +1,5 @@
 import { SmartAppBannerError, type SmartBannerOptions } from '@models';
-import {
-    DEFAULT_OPTIONS,
-    getSmartAppBannerOptions,
-    OPTION_PARSERS,
-} from './options';
+import { getSmartAppBannerOptions, OPTION_PARSERS } from './options';
 import Logger from 'js-logger';
 
 describe('options', () => {
@@ -222,31 +218,66 @@ describe('options', () => {
 });
 
 describe('getSmartAppBannerOptions', () => {
-    // test('applies defaults when no config provided', () => {
-    //     const result = getSmartAppBannerOptions({});
-    //     expect(result).toMatchObject(DEFAULT_OPTIONS);
-    // });
-
     test('warns on unknown option', () => {
-        getSmartAppBannerOptions({ unknown: 'value' } as any);
+        const action = () =>
+            getSmartAppBannerOptions({ unknown: 'value' } as any);
+
+        // an error will occur because we have no valid config
+        expect(action).toThrow();
+        // but the logger should still be called
         expect(vi.mocked(Logger).warn).toHaveBeenCalledWith(
             'Unknown option unknown',
         );
     });
 
-    test('parses known options correctly', () => {
+    test('parses known options correctly for Android', () => {
         const options: SmartBannerOptions = {
             title: 'A title!',
             author: 'It was the other guy 👀',
             icon: '/icon.png',
-            platforms: ['android'],
+            platforms: ['android'], // <--
             price: '$1.99',
             buttonLabel: 'Get test',
-            verbose: true,
             googlePlayStoreUrl: 'https://play.google.com',
             androidIcon: 'android-icon.png',
             androidButtonLabel: 'Install',
             androidPrice: 'Free',
+        };
+
+        const result = getSmartAppBannerOptions(options);
+
+        // common options should be set
+        expect(result.title).toBe(options.title);
+        expect(result.author).toBe(options.author);
+        expect(result.icon).toBe('/icon.png');
+
+        // Android options should be default
+        expect(result.googlePlayStoreUrl).toEqual(
+            new URL('https://play.google.com'),
+        );
+        expect(result.androidButtonLabel).toBe('Install');
+        expect(result.androidIcon).toBe('android-icon.png');
+        expect(result.androidPrice).toBe('Free');
+
+        // Apple options should default
+        expect(result.appStoreUrl).toBeNull();
+        expect(result.appleIcon).toBeNull();
+        expect(result.appleButtonLabel).toBeNull();
+        expect(result.applePrice).toBe('GET - On the App Store');
+
+        // Safari options should be disabled
+        expect(result.appleAppId).toBeNull();
+        expect(result.appleAppArgumentUrl).toBeNull();
+    });
+
+    test('parses known options correctly for Apple', () => {
+        const options: SmartBannerOptions = {
+            title: 'A title!',
+            author: 'It was the other guy 👀',
+            icon: '/icon.png',
+            platforms: ['ios'],
+            price: '$1.99',
+            buttonLabel: 'Get test',
             appStoreUrl: 'https://apps.apple.com',
             appleAppId: '12345',
             appleAppArgumentUrl: 'https://example.com',
@@ -257,13 +288,63 @@ describe('getSmartAppBannerOptions', () => {
 
         const result = getSmartAppBannerOptions(options);
 
+        // common options should be set
         expect(result.title).toBe(options.title);
         expect(result.author).toBe(options.author);
         expect(result.icon).toBe('/icon.png');
-        expect(result.googlePlayStoreUrl).toEqual(
-            new URL('https://play.google.com'),
-        );
 
+        // Android options should be set
+        expect(result.googlePlayStoreUrl).toBeNull();
+        expect(result.androidButtonLabel).toBeNull();
+        expect(result.androidIcon).toBeNull();
+        expect(result.androidPrice).toBe('FREE - On the Google Play Store');
+
+        // Apple options should disabled
         expect(result.appStoreUrl).toEqual(new URL('https://apps.apple.com'));
+        expect(result.appleIcon).toBe('apple-icon.png');
+        expect(result.appleButtonLabel).toBe('Download');
+        expect(result.applePrice).toBe('Free');
+
+        // Safari options should be disabled
+        expect(result.appleAppId).toBeNull();
+        expect(result.appleAppArgumentUrl).toBeNull();
+    });
+
+    test('parses known options correctly for Safari', () => {
+        const options: SmartBannerOptions = {
+            title: 'Safari Time!',
+            author: 'The special Safari config 🧭',
+            icon: '/icon.png',
+            platforms: ['safari'],
+            price: '$99.99',
+            buttonLabel: 'Get tested',
+            appleAppId: '12345',
+            appleAppArgumentUrl: 'https://example.com',
+        };
+
+        const result = getSmartAppBannerOptions(options);
+
+        // common options should be set
+        expect(result.title).toBe(options.title);
+        expect(result.author).toBe(options.author);
+        expect(result.icon).toBe('/icon.png');
+
+        // Android options should be default
+        expect(result.googlePlayStoreUrl).toBeNull();
+        expect(result.androidButtonLabel).toBeNull();
+        expect(result.androidIcon).toBeNull();
+        expect(result.androidPrice).toBe('FREE - On the Google Play Store');
+
+        // Apple options should default
+        expect(result.appStoreUrl).toBeNull();
+        expect(result.appleIcon).toBeNull();
+        expect(result.appleButtonLabel).toBeNull();
+        expect(result.applePrice).toBe('GET - On the App Store');
+
+        // Safari options should be disabled
+        expect(result.appleAppId).toBe('12345');
+        expect(result.appleAppArgumentUrl).toEqual(
+            new URL('https://example.com'),
+        );
     });
 });
