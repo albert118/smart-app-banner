@@ -6,31 +6,59 @@ export type SmartBannerOptions = {
 
     // TODO separate icons, button texts, etc.
     icon: string;
-    platforms: SupportedPlatForms;
+
+    /**
+     * Enabled platforms. If a platform is enabled here it must be configured.
+     *
+     * If 'safari' is included, then the native Safari banner will be enabled and require additional configuration.
+     * Ensure that the appleAppId and (optionally) the appleAppArgumentUrl.
+     *
+     * @see https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners
+     * @default ['android', 'ios']
+     */
+    platforms: SupportedPlatForms[];
+
+    /**
+     * The price of the app.
+     */
     price: 'free' | number;
 
     /**
-     * --------------------------------------------
-     * Android Platform Options
+     * View button label. This can be overriden on a per-platform basis as needed.
+     * @default View
      */
+    buttonLabel?: string;
+
+    /**
+     * Enable verbose logging. Disabled by default.
+     *
+     * @default false
+     */
+    verbose: boolean;
+
+    // --------------------------------------------
+    // Android Platform Options
 
     /**
      * The Google Play Store URL.
      *
      * @example https://play-store-application-url
      */
-    playStoreUrl?: URL;
+    playStoreUrl?: string;
 
     /**
-     * --------------------------------------------
-     * Apple Platform Options
+     * Android specific button label. If not specified, falls back to buttonLabel.
      */
+    androidButtonLabel?: string;
+
+    // --------------------------------------------
+    // Apple Platform Options
 
     /**
      * The Apple app store URL.
      * @example https://app-store-application-url
      */
-    appStoreUrl?: URL;
+    appStoreUrl?: string;
 
     /**
      * Sets the Apple app store ID. This IS required if enableSafariSupport is true
@@ -44,21 +72,48 @@ export type SmartBannerOptions = {
      *
      * @see https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners
      */
-    appleAppArgumentUrl?: URL;
+    appleAppArgumentUrl?: string;
 
     /**
-     * Toggles the native Safari banner.
-     * If this is enabled then appleAppId should also be set and (optionally) the appleAppArgumentUrl.
-     *
-     * @see https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners
-     * @default false
+     * Apple specific button label. If not specified, falls back to buttonLabel.
      */
-    enableSafariSupport?: boolean;
+    appleButtonLabel?: string;
 };
 
 /**
  * Parsed Smart App Banner options
  */
-export type ParsedSmartBannerOptions = Omit<SmartBannerOptions, 'platforms'> & {
-    something: string;
+export type ParsedSmartBannerOptions = Omit<
+    SmartBannerOptions,
+    | 'playStoreUrl'
+    | 'appStoreUrl'
+    | 'appleAppArgumentUrl'
+    | 'androidButtonLabel'
+    | 'appleAppId'
+    | 'appleButtonLabel'
+> & {
+    // --------------------------------------------
+    // Android Platform Options
+    playStoreUrl: URL | null;
+    androidButtonLabel: string | null;
+
+    // --------------------------------------------
+    // Apple Platform Options
+    appStoreUrl: URL | null;
+    appleAppId: string | null;
+    appleAppArgumentUrl: URL | null;
+    appleButtonLabel: string | null;
 };
+
+export class SmartAppBannerError extends Error {
+    constructor(message: string, reason?: any) {
+        super(
+            reason && reason instanceof Error
+                ? `${message}: ${reason.message}`
+                : message,
+        );
+        this.name = 'SmartAppBanner';
+        // TODO: stack trace edit to simplify the stack trace
+        (Error as any).captureStackTrace?.(this, SmartAppBannerError);
+    }
+}

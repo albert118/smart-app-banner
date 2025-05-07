@@ -1,11 +1,7 @@
+import { getSmartAppBannerOptions } from '@data/options';
 import { type SmartAppBannerEvents, DestroyedEvent, ReadyEvent } from '@events';
 import { TypedEventTarget } from '@lib/TypedEventTarget';
-import {
-    DEFAULT_OPTIONS,
-    type ParsedSmartBannerOptions,
-    type SmartBannerOptions,
-} from '@models';
-import { optionsParser } from '@utils/optionsParser';
+import { type ParsedSmartBannerOptions, type SmartBannerOptions } from '@models';
 import Logger from 'js-logger';
 
 export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
@@ -14,10 +10,9 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     constructor(options: SmartBannerOptions) {
         super();
 
-        this.options = optionsParser(DEFAULT_OPTIONS, options);
+        this.options = getSmartAppBannerOptions(options);
 
         this.dispatchEvent(new ReadyEvent());
-
         Logger.info('successfully initialised');
     }
 
@@ -25,22 +20,51 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
         this.dispatchEvent(new DestroyedEvent());
     }
 
+    // --------------------------------------------
+    // Getters
+
+    get title() {
+        return this.options.title;
+    }
+
+    get author() {
+        return this.options.author;
+    }
+
+    get price() {
+        return this.options.price;
+    }
+
+    get icon() {
+        return this.options.icon;
+    }
+
+    get buttonUrl() {
+        // TODO:
+        return this.options.appleButtonLabel;
+    }
+
+    get buttonLabel() {
+        // TODO:
+        return this.options.buttonLabel;
+    }
+
     get html() {
         return `<div class="smartappbanner">
     <a href="#" class="smartappbanner__close" title="" href="nofollow" />
     <div
         class="smartappbanner__app-icon"
-        style="background-image: url(${this.options.icon})"
+        style="background-image: url(${this.icon})"
     />
     <div class="smartappbanner__info">
         <div class="smartappbanner__description__title">
-            ${this.options.title}
+            ${this.title}
         </div>
         <div class="smartappbanner__description__author">
-            ${this.options.author}
+            ${this.author}
         </div>
         <div class="smartappbanner__description__price">
-            ${this.options.price}
+            ${this.price}
         </div>
     </div>
     <a
