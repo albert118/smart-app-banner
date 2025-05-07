@@ -1,16 +1,23 @@
 import { getSmartAppBannerOptions } from '@data/options';
 import { type SmartAppBannerEvents, DestroyedEvent, ReadyEvent } from '@events';
 import { TypedEventTarget } from '@lib/TypedEventTarget';
-import { type ParsedSmartBannerOptions, type SmartBannerOptions } from '@models';
+import {
+    type ParsedSmartBannerOptions,
+    type SmartBannerOptions,
+    type SupportedPlatForm,
+} from '@models';
+import { getCurrentPlatform } from '@utils/platformUtil';
 import Logger from 'js-logger';
 
 export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     readonly options: ParsedSmartBannerOptions;
+    readonly platform: SupportedPlatForm;
 
     constructor(options: SmartBannerOptions) {
         super();
 
         this.options = getSmartAppBannerOptions(options);
+        this.platform = getCurrentPlatform();
 
         this.dispatchEvent(new ReadyEvent());
         Logger.info('successfully initialised');

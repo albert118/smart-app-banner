@@ -1,4 +1,4 @@
-export type SupportedPlatForms = 'android' | 'ios' | 'safari';
+export type SupportedPlatForm = 'android' | 'ios' | 'safari';
 
 export type SmartBannerOptions = {
     title: string;
@@ -16,7 +16,7 @@ export type SmartBannerOptions = {
      * @see https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners
      * @default ['android', 'ios']
      */
-    platforms: SupportedPlatForms[];
+    platforms: SupportedPlatForm[];
 
     /**
      * The price of the app.
