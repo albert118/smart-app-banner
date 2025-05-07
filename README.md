@@ -40,7 +40,7 @@ npm i -S smart-app-banner
 
 ## Configuration
 
-> TODO
+https://github.com/albert118/smart-app-banner/blob/a3b0ec2a68090d45c64b79c2c92f09204f87bf05/src/models.ts#L1-L110
 
 ## Advanced Usage
 
