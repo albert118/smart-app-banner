@@ -14,8 +14,8 @@
     "main": "./src/index.ts",
     "types": "./src/index.ts",
     "scripts": {
-        "type-check": "tsc",
-        "test": "vitest",
+        "type-check": "tsc --project tsconfig.app.json --composite false --noEmit",
+        "test": "vitest --watch false",
         "format": "prettier --write src/"
     },
     "engines": {
@@ -32,6 +32,7 @@
     "devDependencies": {
         "@types/jsdom": "^21.1.7",
         "@types/node": "^22.13.9",
+        "happy-dom": "^17.4.6",
         "jsdom": "^26.0.0",
         "prettier": "3.5.3",
         "typescript": "~5.8.0",

@@ -1,13 +1,10 @@
-import { fileURLToPath } from 'node:url';
-import { defineConfig, configDefaults } from 'vitest/config';
+/**
+ * TL;DR WERROR for tests (block tests that throw warnings)
+ */
+function throwOnWarnings() {
+    console.warn = (message: string) => {
+        throw new Error(`A warning occurred during test execution:\n${message}`);
+    };
+}
 
-export default defineConfig({
-    test: {
-        globals: true,
-        environment: 'happy-dom',
-        exclude: [...configDefaults.exclude],
-        silent: false,
-        setupFiles: ['./vitest.setup.ts'],
-        root: fileURLToPath(new URL('./', import.meta.url)),
-    },
-});
+throwOnWarnings();
