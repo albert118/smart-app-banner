@@ -9,7 +9,7 @@ Logger.useDefaults({
     },
 });
 
-export type { SmartBannerOptions } from '@models';
+export type { SmartBannerOptions, ParsedSmartBannerOptions } from '@models';
+export { DEFAULT_OPTIONS, OPTION_PARSERS } from '@data/options';
 export { SmartAppBanner } from './smartappbanner';
-
 export { events };
