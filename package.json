@@ -14,6 +14,7 @@
     "main": "./src/index.ts",
     "types": "./src/index.ts",
     "scripts": {
+        "build": "vite build",
         "type-check": "tsc --project tsconfig.app.json --composite false --noEmit",
         "test": "vitest --watch false",
         "format": "prettier --write src/"
@@ -36,6 +37,7 @@
         "jsdom": "^26.0.0",
         "prettier": "3.5.3",
         "typescript": "~5.8.0",
+        "vite": "^6.3.5",
         "vitest": "^3.1.3"
     },
     "keywords": [
