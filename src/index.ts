@@ -1,5 +1,6 @@
 import Logger from 'js-logger';
 import * as events from './data/events';
+import './smartappbanner.scss';
 
 Logger.useDefaults({
     // default to warning until we disable it with options

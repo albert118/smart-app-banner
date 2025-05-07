@@ -13,7 +13,7 @@ A Smart App Banner for promoting mobile app installs based on the Safari Apple E
 
 - [ ] change package name to avoid conflicts
 - [ ] add example screenshots
-- [ ] tests
+- [x] tests
 - [ ] styling
 - [ ] cookie feature ("remember dismissal")
 - [ ] Vue 3 usage (plugin)
