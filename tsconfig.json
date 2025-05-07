@@ -26,7 +26,8 @@
         "paths": {
             "@utils/*": ["./src/utils/*"],
             "@lib/*": ["./src/lib/*"],
-            "@events/*": ["./src/events/*"]
+            "@events": ["./src/events.ts"],
+            "@models": ["./src/models.ts"]
         }
     }
 }

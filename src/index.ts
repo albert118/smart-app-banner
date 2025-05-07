@@ -1,4 +1,0 @@
-/**
- * Options!!!
- */
-export interface SmartBannerOptions {}
