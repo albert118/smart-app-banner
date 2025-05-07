@@ -24,7 +24,7 @@ export const DEFAULT_OPTIONS: Required<
     googlePlayStoreUrl: null,
     androidButtonLabel: null,
     androidIcon: null,
-    androidPrice: '',
+    androidPrice: 'FREE - On the Google Play Store',
 
     // --------------------------------------------
     // Apple Platform Options
@@ -33,7 +33,7 @@ export const DEFAULT_OPTIONS: Required<
     appleAppArgumentUrl: null,
     appleButtonLabel: null,
     appleIcon: null,
-    applePrice: '',
+    applePrice: 'GET - On the App Store',
 };
 
 export const OPTION_PARSERS: OptionParsers<
