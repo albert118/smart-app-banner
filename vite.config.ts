@@ -17,6 +17,8 @@ export default defineConfig({
         stripComments({ type: 'keep-legal' }),
     ],
     build: {
+        // disable source-maps in prod
+        sourcemap: false,
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
             name: packageJson.name,
