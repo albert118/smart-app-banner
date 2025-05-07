@@ -1,6 +1,6 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
-    "include": ["src/**/*.ts", "src/**/*.d.ts"],
+    "include": ["**/*.ts", "**/*.d.ts"],
     "exclude": ["dist", "node_modules", "src/**/*.spec.ts"],
     "compilerOptions": {
         "lib": ["ES2021", "DOM", "DOM.Iterable"],
@@ -23,11 +23,13 @@
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true,
         "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+        "baseUrl": ".",
         "paths": {
             "@utils/*": ["./src/utils/*"],
             "@lib/*": ["./src/lib/*"],
             "@models": ["./src/models.ts"],
-            "@data/*": ["./src/data/*"]
+            "@data/*": ["./src/data/*"],
+            "@test-utils/*": ["./src/test-utils/*"]
         }
     }
 }

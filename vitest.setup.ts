@@ -1,3 +1,5 @@
+import { useLoggerMock } from '@test-utils/useLoggerMock';
+
 /**
  * TL;DR WERROR for tests (block tests that throw warnings)
  */
@@ -7,4 +9,11 @@ function throwOnWarnings() {
     };
 }
 
-throwOnWarnings();
+const { setMock: setLoggerMock } = useLoggerMock();
+
+beforeEach(() => {
+    vi.clearAllMocks();
+
+    throwOnWarnings();
+    setLoggerMock();
+});

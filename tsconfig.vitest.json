@@ -1,7 +1,13 @@
 {
     "extends": "./tsconfig.app.json",
-    "include": ["src/**/*.spec.ts"],
-    "exclude": [],
+    "include": [
+        "src/**/*.spec.ts",
+        "**/*.ts",
+        "**/*.d.ts",
+        "vitest.setup.ts",
+        "vitest.config.ts"
+    ],
+    "exclude": ["dist", "node_modules"],
     "compilerOptions": {
         "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
         "lib": [],
