@@ -88,6 +88,19 @@ The price tagline defaults to FREE with platform specific defaults for both Andr
 
 > TODO
 
+## Development
+
+To get started, pull the repo and run a build as well as the tests.
+
+> don't forget to run `npm i`!
+
+```ts
+npm run build
+npm run test
+```
+
+You can checkout the rest of the commands in the [package.json](./package.json).
+
 ## Licence
 
 [MIT](./LICENSE) License © 2025-PRESENT [Albert Ferguson](https://github.com/albert118/)

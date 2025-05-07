@@ -38,6 +38,7 @@ export const DEFAULT_OPTIONS: Required<
 
 export const OPTION_PARSERS: OptionParsers<
     SmartBannerOptions,
+    // @ts-ignore
     ParsedSmartBannerOptions
 > = {
     title: title => {
@@ -84,9 +85,9 @@ export const OPTION_PARSERS: OptionParsers<
     // --------------------------------------------
     // Android Platform Options
     googlePlayStoreUrl: (googlePlayStoreUrl, { rawOptions }) => {
-        if (!rawOptions.platforms.includes('android')) return null;
+        if (!rawOptions.platforms?.includes('android')) return null;
 
-        const reason = `The Android platform was enabled but no valid Google Play Store URL has been configured. Provided URL was "${playStoreUrl}"`;
+        const reason = `The Android platform was enabled but no valid Google Play Store URL has been configured. Provided URL was "${googlePlayStoreUrl}"`;
         if (googlePlayStoreUrl?.isFalsishOrEmpty()) {
             throw new SmartAppBannerError(reason);
         }
@@ -100,13 +101,13 @@ export const OPTION_PARSERS: OptionParsers<
         }
     },
     androidButtonLabel: (androidButtonLabel, { rawOptions }) => {
-        if (!rawOptions.platforms.includes('android')) return null;
+        if (!rawOptions.platforms?.includes('android')) return null;
         return androidButtonLabel ?? null;
     },
     androidIcon: (androidIcon, { rawOptions }) => {
-        if (!rawOptions.platforms.includes('android')) return null;
+        if (!rawOptions.platforms?.includes('android')) return null;
         if (
-            rawOptions.platforms.includes('android') &&
+            rawOptions.platforms?.includes('android') &&
             rawOptions.icon?.isFalsishOrEmpty() &&
             androidIcon?.isFalsishOrEmpty()
         ) {
@@ -116,10 +117,13 @@ export const OPTION_PARSERS: OptionParsers<
         }
         return androidIcon ?? null;
     },
+    androidPrice: (androidPrice, { defaultValue }) => {
+        return androidPrice ?? defaultValue;
+    },
     // --------------------------------------------
     // Apple Platform Options
     appStoreUrl: (appStoreUrl, { rawOptions }) => {
-        if (!rawOptions.platforms.includes('ios')) return null;
+        if (!rawOptions.platforms?.includes('ios')) return null;
 
         const reason = `The iOS platform was enabled but no valid Apple App Store URL has been configured. Provided URL was "${appStoreUrl}"`;
         if (appStoreUrl?.isFalsishOrEmpty()) {
@@ -134,7 +138,7 @@ export const OPTION_PARSERS: OptionParsers<
         }
     },
     appleAppId: (appleAppId, { rawOptions }) => {
-        if (!rawOptions.platforms.includes('safari')) return null;
+        if (!rawOptions.platforms?.includes('safari')) return null;
 
         if (appleAppId?.isFalsishOrEmpty()) {
             throw new SmartAppBannerError(
@@ -146,7 +150,7 @@ export const OPTION_PARSERS: OptionParsers<
         return appleAppId!;
     },
     appleAppArgumentUrl: (appleAppArgumentUrl, { rawOptions }) => {
-        if (!rawOptions.platforms.includes('safari')) return null;
+        if (!rawOptions.platforms?.includes('safari')) return null;
         // this param is optional, if it wasn't specified this is still valid
         if (appleAppArgumentUrl?.isFalsishOrEmpty()) return null;
 
@@ -160,13 +164,13 @@ export const OPTION_PARSERS: OptionParsers<
         }
     },
     appleButtonLabel: (appleButtonLabel, { rawOptions }) => {
-        if (!rawOptions.platforms.includes('ios')) return null;
+        if (!rawOptions.platforms?.includes('ios')) return null;
         return appleButtonLabel ?? null;
     },
     appleIcon: (appleIcon, { rawOptions }) => {
-        if (!rawOptions.platforms.includes('ios')) return null;
+        if (!rawOptions.platforms?.includes('ios')) return null;
         if (
-            rawOptions.platforms.includes('ios') &&
+            rawOptions.platforms?.includes('ios') &&
             rawOptions.icon?.isFalsishOrEmpty() &&
             appleIcon?.isFalsishOrEmpty()
         ) {
@@ -176,6 +180,9 @@ export const OPTION_PARSERS: OptionParsers<
         }
         return appleIcon ?? null;
     },
+    applePrice: (applePrice, { defaultValue }) => {
+        return applePrice ?? defaultValue;
+    },
 };
 
 /**
@@ -183,5 +190,6 @@ export const OPTION_PARSERS: OptionParsers<
  */
 export const getSmartAppBannerOptions = getOptionsParser<
     SmartBannerOptions,
+    // @ts-ignore
     ParsedSmartBannerOptions
 >(DEFAULT_OPTIONS, OPTION_PARSERS);

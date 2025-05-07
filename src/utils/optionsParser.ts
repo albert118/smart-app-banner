@@ -5,7 +5,7 @@ import Logger from 'js-logger';
  * Maps the provided options to their default.
  */
 export type OptionParsers<T, U extends T = T> = {
-    [option in keyof T]: (
+    [option in keyof Required<T>]: (
         val: T[option],
         opts: { defaultValue: U[option]; rawOptions: T },
     ) => U[option];
@@ -59,14 +59,19 @@ export function getOptionsParser<T extends Record<string, any>, U extends T = T>
             ...userOptions,
         };
 
+        // check for unknown options
+        Object.keys(rawOptions).forEach(key => {
+            if (!(parsers && key in parsers)) {
+                Logger.warn(`Unknown option ${key as string}`);
+            }
+        });
+
         const options: U = {} as U;
 
         // build the options map
         Object.entries(rawOptions).forEach(([key, value]: [keyof T, any]) => {
-            if (!(parsers && key in parsers)) {
-                Logger.warn(`Unknown option ${key as string}`);
-                return;
-            }
+            // skip unknown options
+            if (!(parsers && key in parsers)) return;
 
             options[key] = parsers[key](value, {
                 rawOptions: rawOptions,
