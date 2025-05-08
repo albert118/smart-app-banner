@@ -114,7 +114,7 @@ The next step would be to boot a demo project. Checkout the Vue demo [here](http
 - [ ] change package name to avoid conflicts
 - [ ] cookie feature ("remember dismissal")
 - [ ] Vue 3 usage (plugin)
-- [ ] check bundle size and add badge
+- [ ] add badges
 
 ## Licence
 
