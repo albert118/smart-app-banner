@@ -1,14 +1,14 @@
 import { type SupportedPlatForm } from '@models';
+import Logger from 'js-logger';
 
 export function getCurrentPlatform(): SupportedPlatForm | undefined {
     const userAgent = window.navigator.userAgent;
+    let currentPlatform: SupportedPlatForm | undefined = undefined;
 
-    if (/Safari/i.test(userAgent) && /Mobile/i.test(userAgent)) {
-        return 'safari';
-    }
+    Logger.debug('Current user agent: ', userAgent);
 
     if (/Android/i.test(userAgent)) {
-        return 'android';
+        currentPlatform = 'android';
     }
 
     // maxTouchPoints is the only effective method to detect iPad iOS 13+
@@ -22,8 +22,15 @@ export function getCurrentPlatform(): SupportedPlatForm | undefined {
             maxTouchPoints > 0) ||
         /iPhone|iPad|iPod/i.test(userAgent)
     ) {
-        return 'ios';
+        currentPlatform = 'ios';
     }
 
-    return undefined; // an unsupported platform
+    if (/Safari/i.test(userAgent) && /Mobile/i.test(userAgent)) {
+        currentPlatform = 'safari';
+    }
+
+    // undefined denotes an unsupported platform
+    !currentPlatform && Logger.debug('The current platform is not supported');
+
+    return currentPlatform;
 }

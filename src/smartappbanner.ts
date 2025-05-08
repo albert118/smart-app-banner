@@ -36,10 +36,6 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
 
         this.options = getSmartAppBannerOptions(options);
         this.platform = getCurrentPlatform();
-        !this.platform &&
-            Logger.debug(
-                'skipped initialising, the current platform is not support',
-            );
 
         Logger.info('successfully initialised');
     }
