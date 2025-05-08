@@ -1,5 +1,4 @@
 import { getCurrentPlatform } from './platformUtil';
-import { SmartAppBannerError } from '@models';
 
 describe('getCurrentPlatform', () => {
     const originalNavigator = window.navigator;
@@ -43,19 +42,20 @@ describe('getCurrentPlatform', () => {
         expect(getCurrentPlatform()).toBe('ios');
     });
 
-    test('should throw SmartAppBannerError when platform cannot be determined', () => {
+    test('should return "safari" when userAgent contains Safari on mobile', () => {
+        // @ts-ignore
+        window.navigator.userAgent =
+            'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1';
+        expect(getCurrentPlatform()).toBe('safari');
+    });
+
+    test('should not throw SmartAppBannerError when platform cannot be determined', () => {
         // @ts-ignore
         window.navigator.userAgent = 'Mozilla/5.0 (X11; Linux x86_64)';
         // @ts-ignore
         window.navigator.maxTouchPoints = 0;
-        expect(() => getCurrentPlatform()).toThrow(SmartAppBannerError);
-    });
-
-    test('should throw SmartAppBannerError on Windows without maxTouchPoints', () => {
-        // @ts-ignore
-        window.navigator.userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)';
-        // @ts-ignore
-        window.navigator.maxTouchPoints = 0;
-        expect(() => getCurrentPlatform()).toThrow(SmartAppBannerError);
+        expect(() => getCurrentPlatform()).not.toThrow();
+        const result = getCurrentPlatform();
+        expect(result).toBeUndefined();
     });
 });

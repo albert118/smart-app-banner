@@ -1,7 +1,11 @@
-import { SmartAppBannerError, type SupportedPlatForm } from '@models';
+import { type SupportedPlatForm } from '@models';
 
-export function getCurrentPlatform(): SupportedPlatForm {
+export function getCurrentPlatform(): SupportedPlatForm | undefined {
     const userAgent = window.navigator.userAgent;
+
+    if (/Safari/i.test(userAgent) && /Mobile/i.test(userAgent)) {
+        return 'safari';
+    }
 
     if (/Android/i.test(userAgent)) {
         return 'android';
@@ -21,5 +25,5 @@ export function getCurrentPlatform(): SupportedPlatForm {
         return 'ios';
     }
 
-    throw new SmartAppBannerError('Failed to determine the current platform');
+    return undefined; // an unsupported platform
 }
