@@ -11,7 +11,6 @@ A Smart App Banner for promoting mobile app installs based on the Safari Apple E
 
 <img src='https://github.com/user-attachments/assets/de1387da-e51a-4851-9a64-345dbf0349ce' style='width: 69%;' />
 
-
 ## Features
 
 - Typescript support
@@ -81,6 +80,15 @@ The price tagline defaults to FREE with platform specific defaults for both Andr
 Styles can be overriden using the provided SCSS/Sass variables.
 
 <https://github.com/albert118/smart-app-banner/blob/3b9011fa5b391e54901068a895253cebf2b539f6/src/styles/_vars.scss#L1-L8>
+
+You can provide these styles as needed by using the `.scss` files instead,
+
+```scss
+@use 'smart-app-banner/dist/variables' as *;
+
+// overwrite as needed
+$background-color: #000;
+```
 
 ### Vue usage (plugin TODO)
 
