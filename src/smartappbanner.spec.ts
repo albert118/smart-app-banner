@@ -145,13 +145,34 @@ describe('SmartAppBanner', () => {
             (getCurrentPlatform as any).mockReturnValue('safari');
             // dynamically import to ensure mocking order of operations is as expected
             const { SmartAppBanner } = await import('./smartappbanner');
-            const androidBanner = new SmartAppBanner(defaultOptions);
-            expect(androidBanner.title).toBeUndefined();
-            expect(androidBanner.author).toBeUndefined();
-            expect(androidBanner.price).toBeUndefined();
-            expect(androidBanner.icon).toBeUndefined();
-            expect(androidBanner.buttonUrl).toBeUndefined();
-            expect(androidBanner.buttonLabel).toBeUndefined();
+            const safariBanner = new SmartAppBanner(defaultOptions);
+            expect(safariBanner.title).toBeUndefined();
+            expect(safariBanner.author).toBeUndefined();
+            expect(safariBanner.price).toBeUndefined();
+            expect(safariBanner.icon).toBeUndefined();
+            expect(safariBanner.buttonUrl).toBeUndefined();
+            expect(safariBanner.buttonLabel).toBeUndefined();
+        });
+
+        test('should throw an error when attempting to resolve HTML for Safari', async () => {
+            (getCurrentPlatform as any).mockReturnValue('safari');
+            // dynamically import to ensure mocking order of operations is as expected
+            const { SmartAppBanner } = await import('./smartappbanner');
+            const safariBanner = new SmartAppBanner(defaultOptions);
+
+            let caughtError: any | undefined = undefined;
+            try {
+                // should never resolve!
+                const _ = safariBanner.html;
+            } catch (error) {
+                caughtError = error;
+            }
+
+            expect(caughtError).toStrictEqual(
+                new SmartAppBannerError(
+                    'Attempted to render banner. However, the current platform is Safari. This should instead be handled via their recommended meta tag.\nSee: https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners',
+                ),
+            );
         });
     });
 });
