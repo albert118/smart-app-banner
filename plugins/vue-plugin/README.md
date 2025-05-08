@@ -51,13 +51,12 @@ For more on configuration, see the [Smart App Banner](https://github.com/albert1
 
 ## Development
 
-To get started, pull the repo and run a build as well as the tests.
+To get started, pull the repo and run a build.
 
 > don't forget to run `npm i`!
 
 ```ts
 npm run build
-npm run test
 ```
 
 You can checkout the rest of the commands in the [package.json](./package.json).
