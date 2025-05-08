@@ -4,7 +4,7 @@ import path from 'path';
 import packageJson from './package.json';
 import dts from 'vite-plugin-dts';
 import stripComments from 'vite-plugin-strip-comments';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
+import copy from 'rollup-plugin-copy';
 import { normalizePath } from 'vite';
 
 // https://vite.dev/config/
@@ -18,31 +18,34 @@ export default defineConfig({
         // https://github.com/thednp/vite-plugin-strip-comments
         stripComments({ type: 'keep-legal' }),
         // https://www.npmjs.com/package/vite-plugin-static-copy
-        viteStaticCopy({
+        copy({
             targets: [
-                // TODO: Make this copy work
-                // Sass/Scss
-                {
-                    src: normalizePath(
-                        path.resolve(__dirname, 'src/styles/styles.scss'),
-                    ),
-                    dest: `.`,
-                    transform: () => `${packageJson.name}.scss`,
-                },
                 // meta
                 {
-                    src: normalizePath(path.resolve(__dirname, 'LICENSE')),
-                    dest: `.`,
+                    src: './LICENSE',
+                    dest: `dist`,
                 },
                 {
-                    src: normalizePath(path.resolve(__dirname, 'README.md')),
-                    dest: `.`,
+                    src: './README.md',
+                    dest: `dist`,
                 },
                 {
-                    src: normalizePath(path.resolve(__dirname, 'package.json')),
-                    dest: `.`,
+                    src: './package.json',
+                    dest: `dist`,
+                },
+                // SCSS/Sass
+                {
+                    src: 'src/styles/styles.scss',
+                    dest: 'dist',
+                },
+                {
+                    src: 'src/styles/_vars.scss',
+                    dest: 'dist',
+                    rename: `variables.scss`,
                 },
             ],
+            // ensure it runs after bundle is written
+            hook: 'writeBundle',
         }),
     ],
     build: {
@@ -52,7 +55,7 @@ export default defineConfig({
             name: packageJson.name,
             formats: ['es'],
             fileName: packageJson.name,
-            cssFileName: packageJson.name,
+            cssFileName: 'styles',
         },
     },
     resolve: {
