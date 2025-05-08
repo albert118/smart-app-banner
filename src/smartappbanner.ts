@@ -59,7 +59,7 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
         }
 
         this.__bannerElement = document.createElement('div');
-        this.__bannerElement.outerHTML = this.html;
+        this.__bannerElement.innerHTML = this.html;
         this.__bannerElement.id = this.bannerId;
         this.__body.prepend(this.__bannerElement);
 
