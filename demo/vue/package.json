@@ -11,7 +11,9 @@
         "build-only": "vite build",
         "type-check": "vue-tsc --project tsconfig.app.json --composite false --noEmit",
         "test": "vitest --watch false",
-        "format": "prettier --write src/"
+        "format": "prettier --write src/",
+        "clean": "rm -rf ./dist",
+        "prepublish": "npm run clean && npm run build"
     },
     "author": "Albert Ferguson <albertferguson118@gmail.com>",
     "license": "MIT",
