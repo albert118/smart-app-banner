@@ -24,11 +24,7 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
      */
     readonly platform: SupportedPlatForm | undefined;
     readonly bannerId = 'smart-app-banner';
-
     private __bannerElement: HTMLElement | null = null;
-
-    private __closeButton: HTMLElement | null = null;
-    private __callToActionButton: HTMLElement | null = null;
 
     constructor(options: SmartBannerOptions) {
         super();
@@ -63,17 +59,17 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
 
         document.body.prepend(this.__bannerElement);
 
-        this.__closeButton = document.querySelector('smartappbanner__close');
-        this.__closeButton?.addEventListener('click', this.onClickClose, false);
+        // bind "this" to event handlers
+        this.onClickClose = this.onClickClose.bind(this);
+        this.onClickCallToAction = this.onClickCallToAction.bind(this);
 
-        this.__callToActionButton = document.querySelector(
-            'smartappbanner__close',
-        );
-        this.__callToActionButton?.addEventListener(
-            'click',
-            this.onClickCallToAction,
-            false,
-        );
+        document
+            .querySelector('.smartappbanner__close')
+            ?.addEventListener('click', this.onClickClose, false);
+
+        document
+            .querySelector('.smartappbanner__view')
+            ?.addEventListener('click', this.onClickCallToAction, false);
 
         Logger.debug('mounted banner');
         Logger.timeEnd('mounting banner');
@@ -86,6 +82,7 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
         metaTag.name = 'apple-itunes-app';
         metaTag.content = `app-id=${this.options.appleAppId}, app-argument=${this.options.appleAppArgumentUrl}`;
         document.head.append(metaTag);
+        Logger.debug('added Safari configuration');
     }
 
     destroy() {
@@ -111,22 +108,18 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     }
 
     onClickCallToAction(event: Event) {
-        this.dispatchEvent(new ClickedCallToAction());
         event.preventDefault();
+        this.dispatchEvent(new ClickedCallToAction());
     }
 
     removeEventListeners() {
-        this.__closeButton?.removeEventListener(
-            'click',
-            this.onClickClose,
-            false,
-        );
+        document
+            .querySelector('.smartappbanner__close')
+            ?.removeEventListener('click', this.onClickClose, false);
 
-        this.__callToActionButton?.removeEventListener(
-            'click',
-            this.onClickCallToAction,
-            false,
-        );
+        document
+            .querySelector('.smartappbanner__view')
+            ?.removeEventListener('click', this.onClickCallToAction, false);
     }
 
     // --------------------------------------------
@@ -211,11 +204,12 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
 
         return `
 <div class="smartappbanner">
-	<a
-		href="#"
-		class="smartappbanner__close"
-		href="nofollow"
-	></a>
+    <div class="smartappbanner__close">
+        <a
+            href="#"
+            href="nofollow"
+        ></a>
+    </div>
 	<div
 		class="smartappbanner__app-icon"
 		style="background-image: url(${this.icon})"
