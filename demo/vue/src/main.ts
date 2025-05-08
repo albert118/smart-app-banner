@@ -3,7 +3,7 @@ import './assets/main.css';
 import { createApp } from 'vue';
 import App from './App.vue';
 // import { default as createSmartAppBanner } from './smartAppBannerPlugin';
-import { type SmartBannerOptions } from '@easy-smart-app-banner/core';
+// import { type SmartBannerOptions } from '@easy-smart-app-banner/core';
 
 createApp(App)
     .use(createSmartAppBanner, {
