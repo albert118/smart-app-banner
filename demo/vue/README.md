@@ -6,11 +6,13 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## Quick Start
 
-Install the deps, run the tests, and boot the demo!
+Install the deps and boot the demo!
+
+> This will use the local package build. If you want to test against the remote, then update `package.json`.
+> If you ever want to swap back to the local build version, then swap the package version to `file:../../`
 
 ```ts
 npm run setup
-npm run test
 npm run dev
 ```
 
@@ -27,7 +29,3 @@ TypeScript cannot handle type information for `.vue` imports by default, so we r
 ## Customize configuration
 
 See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Licence
-
-[MIT](./LICENSE) License © 2025-PRESENT [Albert Ferguson](https://github.com/albert118/)

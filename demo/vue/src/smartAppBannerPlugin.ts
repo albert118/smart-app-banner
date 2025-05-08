@@ -1,7 +1,10 @@
 import type { App, InjectionKey } from 'vue';
-import { SmartAppBanner, type SmartBannerOptions } from 'smart-app-banner';
-import 'smart-app-banner/style.css';
+import '@easy-smart-app-banner/core/style.css';
 import Logger from 'js-logger';
+import {
+    SmartAppBanner,
+    type SmartBannerOptions,
+} from '@easy-smart-app-banner/core';
 
 Logger.useDefaults({
     // default to warning until we disable it with options
