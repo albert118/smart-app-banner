@@ -1,0 +1,11 @@
+{
+  "name": "smart-app-banner",
+  "version": "1.0.0",
+  "description": "A Vue demo for smart-app-banner",
+  "main": "main.ts",
+  "scripts": {
+    "test": "vitest"
+  },
+  "author": "",
+  "license": "MIT"
+}
