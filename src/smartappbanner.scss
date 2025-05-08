@@ -1,33 +1,85 @@
-// TODO: styling and passthrough styling configuration
+$light-grey: #f3f3f3;
+$grey: #716f6f;
+$blue: #1474fc;
+$black: #000;
+$close-size: 16px;
+$icon-size: 64px;
+
+// TODO: styling passthrough/configuration
+// TODO: expose the scss file and variables for customisation?
 .smartappbanner {
     position: absolute;
     top: 0;
     left: 0;
 
     display: flex;
-    overflow-x: hidden;
-    width: 100%;
-    height: 60px;
+    justify-content: space-evenly;
+    align-items: center;
 
-    // TODO: allow injecting your own font-family?
+    // clipping is better than tiny scrollbars
+    overflow: hidden;
+    width: 100%;
+    height: 80px;
+    background-color: $light-grey;
+
     font-family: Helvetica, sans, sans-serif;
+    color: $black;
 
     &__close {
+        width: $close-size;
+        height: $close-size;
+        position: relative;
+    }
+
+    &__close:before,
+    &__close:after {
+        position: absolute;
+        left: 6px;
+        content: ' ';
+        height: $close-size;
+        width: 2px;
+        background-color: $grey;
+    }
+
+    &__close:before {
+        transform: rotate(45deg);
+    }
+
+    &__close:after {
+        transform: rotate(-45deg);
     }
 
     &__app-icon {
+        display: block;
+        background-size: $icon-size $icon-size;
+        width: $icon-size;
+        height: $icon-size;
     }
 
-    &__info {
+    &__description {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        // match the height of the icon to align the info with it
+        height: $icon-size;
+        color: $black;
+
+        &__title {
+            font-size: 14px;
+        }
+
+        &__author,
+        &__price {
+            font-size: 12px;
+        }
     }
 
     &__view {
-        display: block;
         padding: 0 10px;
         min-width: 10%;
         border-radius: 5px;
-        // background: $light-grey;
-        // color: $blue;
+        color: $blue;
         font-size: 18px;
         text-align: center;
         text-decoration: none;

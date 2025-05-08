@@ -132,7 +132,18 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
 
     get price() {
         if (this.platform === 'safari') return;
-        return this.options.price;
+
+        if (this.platform === 'android' && this.options.androidPrice) {
+            return this.options.androidPrice;
+        }
+
+        if (this.platform === 'ios' && this.options.applePrice) {
+            return this.options.applePrice;
+        }
+
+        // if there's really nothign by this point - validation has failed
+        // but we don't want to accidentally render null
+        return this.options.price ?? '';
     }
 
     get icon() {
@@ -146,7 +157,9 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
             return this.options.appleIcon;
         }
 
-        return this.options.icon;
+        // if there's really nothign by this point - validation has failed
+        // but we don't want to accidentally render null
+        return this.options.icon ?? '';
     }
 
     get buttonUrl() {
@@ -182,32 +195,31 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
             );
         }
 
-        return `<div class="smartappbanner">
-    <a href="#" class="smartappbanner__close" title="" href="nofollow" />
-    <div
-        class="smartappbanner__app-icon"
-        style="background-image: url(${this.icon})"
-    />
-    <div class="smartappbanner__info">
-        <div class="smartappbanner__description__title">
-            ${this.title}
-        </div>
-        <div class="smartappbanner__description__author">
-            ${this.author}
-        </div>
-        <div class="smartappbanner__description__price">
-            ${this.price}
-        </div>
-    </div>
-    <a
-        href="${this.buttonUrl}"
-        target="_blank"
-        rel="noopener"
-        aria-label="${this.buttonLabel}"
-        class="smartappbanner__view"
-    >
-        <span class="smartbanner__view__label"></span>
-    </a>
+        return `
+<div class="smartappbanner">
+	<a
+		href="#"
+		class="smartappbanner__close"
+		href="nofollow"
+	></a>
+	<div
+		class="smartappbanner__app-icon"
+		style="background-image: url(${this.icon})"
+	></div>
+	<div class="smartappbanner__description">
+		<div class="smartappbanner__description__title">${this.title}</div>
+		<div class="smartappbanner__description__author">${this.author}</div>
+		<div class="smartappbanner__description__price">${this.price}</div>
+	</div>
+	<a
+		href="${this.buttonUrl}"
+		target="_blank"
+		rel="noopener"
+		aria-label="${this.buttonLabel}"
+		class="smartappbanner__view"
+	>
+		<span class="smartbanner__view__label">${this.buttonLabel}</span>
+	</a>
 </div>
 `;
     }
