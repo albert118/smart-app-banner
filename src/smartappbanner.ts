@@ -17,7 +17,12 @@ import Logger from 'js-logger';
 
 export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     readonly options: ParsedSmartBannerOptions;
-    readonly platform: SupportedPlatForm;
+
+    /**
+     * If the platform is undefined, then it is not a supported platform.
+     * eg. a desktop environment (as this is intended for mobile)
+     */
+    readonly platform: SupportedPlatForm | undefined;
     readonly bannerId = 'smart-app-banner';
 
     private __body: HTMLBodyElement | null = null;
@@ -31,6 +36,10 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
 
         this.options = getSmartAppBannerOptions(options);
         this.platform = getCurrentPlatform();
+        !this.platform &&
+            Logger.debug(
+                'skipped initialising, the current platform is not support',
+            );
 
         Logger.info('successfully initialised');
     }
@@ -39,6 +48,8 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     // Lifecycle
 
     mount() {
+        if (!this.platform) return;
+
         this.__body = document.querySelector('body');
 
         if (!this.__body) {
@@ -67,7 +78,7 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     }
 
     destroy() {
-        if (!this.__bannerElement || !this.__body) return;
+        if (!this.__bannerElement || !this.__body || !this.platform) return;
         this.removeEventListeners();
         this.__body.removeChild(this.__bannerElement);
         this.dispatchEvent(new DestroyedEvent());
