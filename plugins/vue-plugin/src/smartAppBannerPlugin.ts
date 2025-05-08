@@ -1,5 +1,8 @@
 import type { App, InjectionKey } from 'vue';
-import { SmartAppBanner, type SmartBannerOptions } from 'smart-app-banner';
+import {
+    SmartAppBanner,
+    type SmartBannerOptions,
+} from '@easy-smart-app-banner/core';
 import Logger from 'js-logger';
 
 export const SmartAppBannerInjectionKey = Symbol(

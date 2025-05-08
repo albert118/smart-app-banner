@@ -1,5 +1,5 @@
-@forward 'vars';
-@use 'vars' as settings;
+@forward 'variables';
+@use 'variables' as settings;
 
 .smartappbanner {
     position: absolute;

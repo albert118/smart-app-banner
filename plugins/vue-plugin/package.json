@@ -1,21 +1,22 @@
 {
-    "name": "smart-app-banner-vue-plugin",
-    "shortName": "Smart App Banner - Vue Plugin",
-    "description": "A Vue Plugin for the Smart App Banner",
-    "homepage": "https://github.com/albert118/smart-app-banner/",
+    "name": "@easy-smart-app-banner/vue-plugin",
+    "shortName": "Easy Smart App Banner - Vue Plugin",
+    "description": "A Vue Plugin for the Easy Smart App Banner",
+    "homepage": "https://github.com/albert118/smart-app-banner/tree/master/plugins/vue-plugin",
     "author": "Albert Ferguson <albertferguson118@gmail.com>",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/albert118/smart-app-banner/issues"
     },
-    "version": "1.0.0",
+    "version": "1.0.5",
     "private": false,
     "type": "module",
-    "main": "./dist/index.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "exports": {
         ".": {
-            "import": "./dist/smart-app-banner.js"
+            "import": "./dist/index.js"
         },
         "./style.css": "./dist/styles.css",
         "./style.scss": "./dist/styles.scss",
@@ -26,7 +27,9 @@
         "build-only": "vite build",
         "type-check": "vue-tsc --project tsconfig.app.json --composite false --noEmit",
         "test": "echo No tests found!",
-        "format": "prettier --write src/"
+        "format": "prettier --write src/",
+        "clean": "rm -rf ./dist",
+        "prepublish": "npm run clean && npm run build"
     },
     "engines": {
         "node": ">=20"
@@ -36,11 +39,11 @@
         "url": "git+https://github.com/albert118/smart-app-banner.git"
     },
     "dependencies": {
+        "@easy-smart-app-banner/core": "^1.0.4",
         "@vueuse/core": "^13.0.0",
         "js-logger": "^1.6.1",
         "typescript": "^5.8.2",
-        "vue": "^3.5.13",
-        "smart-app-banner": "file:../../"
+        "vue": "^3.5.13"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^5.2.3",
@@ -58,5 +61,14 @@
         "vite-plugin-static-copy": "^2.3.1",
         "vite-plugin-strip-comments": "^0.0.5",
         "vue-tsc": "^2.2.10"
-    }
+    },
+    "keywords": [
+        "typescript",
+        "vue",
+        "mobile",
+        "smartbanner"
+    ],
+    "files": [
+        "dist"
+    ]
 }

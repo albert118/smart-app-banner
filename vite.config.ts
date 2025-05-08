@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import tsconfig from './tsconfig.app.json';
 import path from 'path';
-import packageJson from './package.json';
 import dts from 'vite-plugin-dts';
 import stripComments from 'vite-plugin-strip-comments';
 import copy from 'rollup-plugin-copy';
@@ -39,9 +38,8 @@ export default defineConfig({
                     dest: 'dist',
                 },
                 {
-                    src: 'src/styles/_vars.scss',
+                    src: 'src/styles/variables.scss',
                     dest: 'dist',
-                    rename: `variables.scss`,
                 },
             ],
             // ensure it runs after bundle is written
@@ -52,9 +50,8 @@ export default defineConfig({
         sourcemap: true,
         lib: {
             entry: normalizePath(path.resolve(__dirname, 'src/index.ts')),
-            name: packageJson.name,
             formats: ['es'],
-            fileName: packageJson.name,
+            fileName: 'index',
             cssFileName: 'styles',
         },
     },

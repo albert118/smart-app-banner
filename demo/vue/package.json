@@ -1,5 +1,5 @@
 {
-    "name": "smart-app-banner",
+    "name": "@easy-smart-app-banner/vue-demo",
     "version": "1.0.0",
     "description": "A Vue demo for smart-app-banner",
     "main": "main.ts",
@@ -11,7 +11,9 @@
         "build-only": "vite build",
         "type-check": "vue-tsc --project tsconfig.app.json --composite false --noEmit",
         "test": "vitest --watch false",
-        "format": "prettier --write src/"
+        "format": "prettier --write src/",
+        "clean": "rm -rf ./dist",
+        "prepublish": "npm run clean && npm run build"
     },
     "author": "Albert Ferguson <albertferguson118@gmail.com>",
     "license": "MIT",
@@ -20,9 +22,10 @@
     },
     "private": false,
     "dependencies": {
+        "@easy-smart-app-banner/core": "^1.0.4",
+        "@easy-smart-app-banner/vue-plugin": "^1.0.5",
         "@vueuse/core": "^13.0.0",
         "js-logger": "^1.6.1",
-        "smart-app-banner": "file:../../",
         "typescript": "^5.8.2",
         "vue": "^3.5.13",
         "vue-router": "^4.5.0"

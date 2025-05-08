@@ -14,17 +14,15 @@ export { SmartAppBannerInjectionKey } from './smartAppBannerPlugin';
 
 export default SmartAppBannerPlugin;
 
-// TODO:
-// // import and re-export styles from original module
-// /**
-//  * @internal
-//  */
-// import 'smart-app-banner/style.css';
-// /**
-//  * @internal
-//  */
-// import 'smart-app-banner/dist/style.scss';
-// /**
-//  * @internal
-//  */
-// import 'smart-app-banner/dist/variables.scss';
+/**
+ * @internal
+ */
+import '@easy-smart-app-banner/core/style.css';
+/**
+ * @internal
+ */
+import '@easy-smart-app-banner/core/style.scss';
+/**
+ * @internal
+ */
+import '@easy-smart-app-banner/core/variables.scss';

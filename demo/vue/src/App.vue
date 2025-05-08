@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Logger from 'js-logger';
-import HelloWorld from './components/HelloWorld.vue';
-import TheWelcome from './components/TheWelcome.vue';
-import { useSmartAppBanner } from './smartAppBannerPlugin';
+import HelloWorld from '@components/HelloWorld.vue';
+import TheWelcome from '@components/TheWelcome.vue';
+import { useSmartAppBanner } from '@easy-smart-app-banner/vue-plugin';
 
 const smartAppBanner = useSmartAppBanner();
 
@@ -10,6 +10,7 @@ try {
     // mount the component
     smartAppBanner.mount();
 } catch (error) {
+    // catch any errors gracefully if there's any config or platform issues
     Logger.error(error);
 }
 </script>
