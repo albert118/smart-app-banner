@@ -9,6 +9,9 @@ A Smart App Banner for promoting mobile app installs based on the Safari Apple E
 >
 > For specific details on iOS and Safari specifically, read [here](https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners) and for Android see [here](https://developer.chrome.com/blog/app-install-banners-native/).
 
+<img src='https://github.com/user-attachments/assets/de1387da-e51a-4851-9a64-345dbf0349ce' style='width: 69%;' />
+
+
 ## Features
 
 - Typescript support
@@ -19,9 +22,6 @@ A Smart App Banner for promoting mobile app installs based on the Safari Apple E
   - Safari specific config
 - Option, use SCSS/Sass variables to configure the banner as needed
 
-![image](https://github.com/user-attachments/assets/de1387da-e51a-4851-9a64-345dbf0349ce)
-
-![image](https://github.com/user-attachments/assets/a720a5c5-9073-4c7b-b8b6-fe7518f2eee7)
 ---
 
 ## Install
