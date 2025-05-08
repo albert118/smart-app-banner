@@ -1,8 +1,8 @@
 {
-    "name": "smart-app-banner-vue-plugin",
-    "shortName": "Smart App Banner - Vue Plugin",
-    "description": "A Vue Plugin for the Smart App Banner",
-    "homepage": "https://github.com/albert118/smart-app-banner/",
+    "name": "@easy-smart-app-banner/vue-plugin",
+    "shortName": "Easy Smart App Banner - Vue Plugin",
+    "description": "A Vue Plugin for the Easy Smart App Banner",
+    "homepage": "https://github.com/albert118/smart-app-banner/tree/master/plugins/vue-plugin",
     "author": "Albert Ferguson <albertferguson118@gmail.com>",
     "license": "MIT",
     "bugs": {
@@ -36,6 +36,7 @@
         "url": "git+https://github.com/albert118/smart-app-banner.git"
     },
     "dependencies": {
+        "@easy-smart-app-banner/core": "^1.0.0",
         "@vueuse/core": "^13.0.0",
         "js-logger": "^1.6.1",
         "typescript": "^5.8.2",
@@ -58,5 +59,14 @@
         "vite-plugin-static-copy": "^2.3.1",
         "vite-plugin-strip-comments": "^0.0.5",
         "vue-tsc": "^2.2.10"
-    }
+    },
+    "keywords": [
+        "typescript",
+        "vue",
+        "mobile",
+        "smartbanner"
+    ],
+    "files": [
+        "dist"
+    ]
 }
