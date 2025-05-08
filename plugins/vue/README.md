@@ -21,4 +21,18 @@ createApp(App)
     appStoreUrl: 'https://app-store-application-url',
   } as SmartBannerOptions)
   .mount('#app');
+
+
+// App.vue
+<script setup lang=ts>
+import { useSmartAppBanner } from 'smart-app-banner/vue-plugin';
+const smartAppBanner = useSmartAppBanner()
+
+try {
+    // try-mount the component
+    smartAppBanner.mount();
+} catch (error) {
+    console.error(error);
+}
+</script>
 ```
