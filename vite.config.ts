@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import tsconfig from './tsconfig.app.json';
 import path from 'path';
-import packageJson from './package.json';
 import dts from 'vite-plugin-dts';
 import stripComments from 'vite-plugin-strip-comments';
 import copy from 'rollup-plugin-copy';
