@@ -1,7 +1,7 @@
 {
-    "name": "smart-app-banner",
-    "shortName": "Smart App Banner",
-    "description": "A Smart App Banner for promoting mobile app installs based on the Safari Apple Experience. Includes support for Safari too.",
+    "name": "smart-app-banner-vue-plugin",
+    "shortName": "Smart App Banner - Vue Plugin",
+    "description": "A Vue Plugin for the Smart App Banner",
     "homepage": "https://github.com/albert118/smart-app-banner/",
     "author": "Albert Ferguson <albertferguson118@gmail.com>",
     "license": "MIT",
@@ -11,8 +11,8 @@
     "version": "1.0.0",
     "private": false,
     "type": "module",
-    "main": "./dist/smart-app-banner.js",
-    "types": "./dist/smart-app-banner.d.ts",
+    "main": "./dist/index.ts",
+    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
             "import": "./dist/smart-app-banner.js"
@@ -24,8 +24,8 @@
     "scripts": {
         "build": "npm run build-only && npm run type-check",
         "build-only": "vite build",
-        "type-check": "tsc --project tsconfig.app.json --composite false --noEmit",
-        "test": "vitest --watch false",
+        "type-check": "vue-tsc --project tsconfig.app.json --composite false --noEmit",
+        "test": "echo No tests found!",
         "format": "prettier --write src/"
     },
     "engines": {
@@ -36,10 +36,15 @@
         "url": "git+https://github.com/albert118/smart-app-banner.git"
     },
     "dependencies": {
+        "@vueuse/core": "^13.0.0",
         "js-logger": "^1.6.1",
-        "typescript": "^5.8.2"
+        "typescript": "^5.8.2",
+        "vue": "^3.5.13",
+        "smart-app-banner": "file:../../"
     },
     "devDependencies": {
+        "@vitejs/plugin-vue": "^5.2.3",
+        "@vue/compiler-sfc": "^3.5.13",
         "@types/jsdom": "^21.1.7",
         "@types/node": "^22.13.9",
         "happy-dom": "^17.4.6",
@@ -52,15 +57,6 @@
         "vite-plugin-dts": "^4.5.3",
         "vite-plugin-static-copy": "^2.3.1",
         "vite-plugin-strip-comments": "^0.0.5",
-        "vitest": "^3.1.3"
-    },
-    "keywords": [
-        "javascript",
-        "typescript",
-        "mobile",
-        "ios",
-        "android",
-        "smartbanner",
-        "safari"
-    ]
+        "vue-tsc": "^2.2.10"
+    }
 }

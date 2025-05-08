@@ -1,8 +1,5 @@
-import type { SmartAppBanner } from 'smart-app-banner';
-
-export const SmartAppBannerInjectionKey = Symbol(
-    'SmartAppBanner',
-) as InjectionKey<SmartAppBanner>;
+import { inject } from 'vue';
+import { SmartAppBannerInjectionKey } from './smartAppBannerPlugin';
 
 export function useSmartAppBanner() {
     const instance = inject(SmartAppBannerInjectionKey);
