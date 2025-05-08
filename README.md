@@ -9,28 +9,19 @@ A Smart App Banner for promoting mobile app installs based on the Safari Apple E
 >
 > For specific details on iOS and Safari specifically, read [here](https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners) and for Android see [here](https://developer.chrome.com/blog/app-install-banners-native/).
 
-## TODO
-
-- [ ] change package name to avoid conflicts
-- [ ] add example screenshots
-- [x] tests
-- [ ] styling
-- [ ] cookie feature ("remember dismissal")
-- [ ] Vue 3 usage (plugin)
-- [ ] check bundle size and add badge
-
 ## Features
 
 - Typescript support
 - Standalone/Frameworkless
-- Small!
+- Small! `15.59 kB │ gzip: 4.50 kB │ map: 50.44 kB`
 - Platform specific
   - custom banner for iOS (non-Safari) and Android user agents
   - Safari specific config
-- Option, use Sass variables to configure the banner as needed
+- Option, use SCSS/Sass variables to configure the banner as needed
 
-> TODO: Examples per platform
+![image](https://github.com/user-attachments/assets/de1387da-e51a-4851-9a64-345dbf0349ce)
 
+![image](https://github.com/user-attachments/assets/a720a5c5-9073-4c7b-b8b6-fe7518f2eee7)
 ---
 
 ## Install
@@ -85,9 +76,11 @@ The price tagline defaults to FREE with platform specific defaults for both Andr
 }
 ```
 
-### SCSS Variables
+### SCSS/Sass Variables
 
-> TODO link here to vars file
+Styles can be overriden using the provided SCSS/Sass variables.
+
+<https://github.com/albert118/smart-app-banner/blob/3b9011fa5b391e54901068a895253cebf2b539f6/src/styles/_vars.scss#L1-L8>
 
 ### Vue usage (plugin TODO)
 
@@ -105,6 +98,15 @@ npm run test
 ```
 
 You can checkout the rest of the commands in the [package.json](./package.json).
+
+The next step would be to boot a demo project. Checkout the Vue demo [here](https://github.com/albert118/smart-app-banner/tree/master/demo/vue).
+
+## TODO
+
+- [ ] change package name to avoid conflicts
+- [ ] cookie feature ("remember dismissal")
+- [ ] Vue 3 usage (plugin)
+- [ ] check bundle size and add badge
 
 ## Licence
 
