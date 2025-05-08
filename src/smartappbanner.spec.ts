@@ -141,17 +141,47 @@ describe('SmartAppBanner', () => {
             expect(iosBanner.buttonLabel).toBe('Download on the App Store');
         });
 
-        test('should not set values for Safari', async () => {
+        test('should not set values for Safari nor render to DOM', async () => {
             (getCurrentPlatform as any).mockReturnValue('safari');
             // dynamically import to ensure mocking order of operations is as expected
             const { SmartAppBanner } = await import('./smartappbanner');
             const safariBanner = new SmartAppBanner(defaultOptions);
+
+            // values should be undefined
             expect(safariBanner.title).toBeUndefined();
             expect(safariBanner.author).toBeUndefined();
             expect(safariBanner.price).toBeUndefined();
             expect(safariBanner.icon).toBeUndefined();
             expect(safariBanner.buttonUrl).toBeUndefined();
             expect(safariBanner.buttonLabel).toBeUndefined();
+
+            // DOM should not mount a banner
+            expect(document.querySelector(banner.bannerId)).toBeNull();
+        });
+
+        test('should add Safari meta tag', async () => {
+            (getCurrentPlatform as any).mockReturnValue('safari');
+            // dynamically import to ensure mocking order of operations is as expected
+            const { SmartAppBanner } = await import('./smartappbanner');
+
+            const safariOptions = {
+                appleAppId: '12354',
+                appleAppArgumentUrl: 'https://not-real.fake/somepath/1111?arg=1',
+            };
+            const safariBanner = new SmartAppBanner({
+                ...defaultOptions,
+                ...safariOptions,
+            });
+            safariBanner.mount();
+
+            const safariMetaTag = [
+                ...document.head.querySelectorAll('meta'),
+            ].find(meta => meta.name === 'apple-itunes-app');
+
+            expect(safariMetaTag).toBeDefined();
+            expect(safariMetaTag!.content).toMatch(
+                `app-id=${safariOptions.appleAppId}, app-argument=${safariOptions.appleAppArgumentUrl}`,
+            );
         });
 
         test('should throw an error when attempting to resolve HTML for Safari', async () => {
@@ -162,6 +192,7 @@ describe('SmartAppBanner', () => {
 
             let caughtError: any | undefined = undefined;
             try {
+                safariBanner.mount();
                 // should never resolve!
                 const _ = safariBanner.html;
             } catch (error) {
