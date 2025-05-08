@@ -4,6 +4,7 @@ import {
     ClickedCallToAction,
     DestroyedEvent,
     ReadyEvent,
+    ToggledVisibility,
 } from '@data/events';
 import { TypedEventTarget } from '@lib/TypedEventTarget';
 import {
@@ -14,6 +15,7 @@ import {
 } from '@models';
 import { getCurrentPlatform } from '@utils/platformUtil';
 import Logger from 'js-logger';
+import { useDismissalCookie } from '@data/dismissalCookie';
 
 export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     readonly options: ParsedSmartBannerOptions;
@@ -50,6 +52,9 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
             this.setUpSafari();
             return;
         }
+
+        const dismissalCookie = useDismissalCookie();
+        if (dismissalCookie.isDismissed()) return;
 
         Logger.time('mounting banner');
 
@@ -99,11 +104,36 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
         this.dispatchEvent(new DestroyedEvent());
     }
 
+    /**
+     * Toggles the banner visibility programmatically.
+     * This still respects the platform visibility!
+     *
+     * @param visible
+     */
+    setBannerVisibility(visible: boolean) {
+        const dismissalCookie = useDismissalCookie();
+
+        if (visible) {
+            Logger.debug('re-showing banner');
+            dismissalCookie.show(this.options.dismissPath);
+        } else {
+            Logger.debug('dismissing banner');
+            dismissalCookie.dismiss(this.options.dismissPath);
+        }
+
+        // refresh the component
+        this.destroy();
+        this.mount();
+        this.dispatchEvent(new ToggledVisibility());
+    }
+
     // --------------------------------------------
     // Event Handlers
 
     onClickClose(event: Event) {
         event.preventDefault();
+        const dismissalCookie = useDismissalCookie();
+        dismissalCookie.dismiss(this.options.dismissPath);
         this.destroy();
     }
 

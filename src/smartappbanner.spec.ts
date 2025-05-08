@@ -1,5 +1,5 @@
 import { type SmartAppBanner } from './smartappbanner';
-import { SmartAppBannerError } from '@models';
+import { SmartAppBannerError, type SmartBannerOptions } from '@models';
 
 vi.mock('@utils/platformUtil', () => ({
     getCurrentPlatform: vi.fn(),
@@ -13,7 +13,7 @@ import { getCurrentPlatform } from '@utils/platformUtil';
 
 describe('SmartAppBanner', () => {
     let banner: SmartAppBanner;
-    const defaultOptions = {
+    const defaultOptions: SmartBannerOptions = {
         title: 'Test App',
         author: 'Test Author',
         price: '$0.99',
@@ -28,6 +28,7 @@ describe('SmartAppBanner', () => {
         googlePlayStoreUrl: 'https://play.google.com',
         appStoreUrl: 'https://apps.apple.com',
         verbose: false,
+        dismissPath: '/',
     };
 
     const getBanner = () => document.querySelector(`#${banner.bannerId}`);
