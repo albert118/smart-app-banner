@@ -11,18 +11,19 @@
     "version": "1.0.3",
     "private": false,
     "type": "module",
-    "main": "./dist/smart-app-banner.js",
-    "types": "./dist/smart-app-banner.d.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
-            "import": "./dist/smart-app-banner.js"
+            "import": "./dist/index.js"
         },
         "./style.css": "./dist/styles.css",
         "./style.scss": "./dist/styles.scss",
         "./variables.scss": "./dist/variables.scss"
     },
     "scripts": {
-        "build": "npm run build-only && npm run type-check",
+        "build": "npm run clean && npm run build-only && npm run type-check",
         "build-only": "vite build",
         "type-check": "tsc --project tsconfig.app.json --composite false --noEmit",
         "test": "vitest --watch false",
