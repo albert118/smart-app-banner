@@ -88,7 +88,7 @@ export type SmartBannerOptions = {
     /**
      * Sets the argument URL parsed to Safari browsers.
      *
-     * @see https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners
+     * @see https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners#Provide-Navigational-Context-to-Your-App
      */
     appleAppArgumentUrl?: string;
 

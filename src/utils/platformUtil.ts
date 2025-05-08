@@ -1,10 +1,18 @@
-import { SmartAppBannerError, type SupportedPlatForm } from '@models';
+import { type SupportedPlatForm } from '@models';
+import Logger from 'js-logger';
 
-export function getCurrentPlatform(): SupportedPlatForm {
+// a good demo site for testing assumptions
+// http://detectmobilebrowsers.com/
+// a Gist "blog" on device detection
+// https://gist.github.com/dalethedeveloper/1503252
+export function getCurrentPlatform(): SupportedPlatForm | undefined {
     const userAgent = window.navigator.userAgent;
+    let currentPlatform: SupportedPlatForm | undefined = undefined;
 
-    if (/Android/i.test(userAgent)) {
-        return 'android';
+    Logger.debug('Current user agent: ', userAgent);
+
+    if (/Mobile|Android/i.test(userAgent)) {
+        currentPlatform = 'android';
     }
 
     // maxTouchPoints is the only effective method to detect iPad iOS 13+
@@ -18,8 +26,23 @@ export function getCurrentPlatform(): SupportedPlatForm {
             maxTouchPoints > 0) ||
         /iPhone|iPad|iPod/i.test(userAgent)
     ) {
-        return 'ios';
+        currentPlatform = 'ios';
     }
 
-    throw new SmartAppBannerError('Failed to determine the current platform');
+    // assert Safari after iOS to ensure we prefer Safari over non-Safari iOS browsers
+
+    if (
+        /^(?=.*(iPhone|iPad|iPod))(?=.*AppleWebKit)(?!.*(criOS|fxiOS|opiOS|chrome|android)).*/i.test(
+            userAgent,
+        )
+    ) {
+        currentPlatform = 'safari';
+    }
+
+    // undefined denotes an unsupported platform
+    !currentPlatform && Logger.debug('The current platform is not supported');
+
+    Logger.debug('Resolved current platform as:', currentPlatform);
+
+    return currentPlatform;
 }

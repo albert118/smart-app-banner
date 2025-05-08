@@ -27,6 +27,7 @@ A Smart App Banner for promoting mobile app installs based on the Safari Apple E
 - Platform specific
   - custom banner for iOS (non-Safari) and Android user agents
   - Safari specific config
+- Option, use Sass variables to configure the banner as needed
 
 > TODO: Examples per platform
 
@@ -83,6 +84,10 @@ The price tagline defaults to FREE with platform specific defaults for both Andr
     appleButtonLabel: null
 }
 ```
+
+### SCSS Variables
+
+> TODO link here to vars file
 
 ### Vue usage (plugin TODO)
 

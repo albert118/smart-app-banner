@@ -20,7 +20,8 @@ export default defineConfig({
             vueTemplate: true,
         }),
         vue(),
-        vueDevTools(),
+        // enable if needed - but this can block the banner
+        // vueDevTools(),
     ],
     resolve: {
         alias: Object.fromEntries(

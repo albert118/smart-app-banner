@@ -17,19 +17,22 @@ import Logger from 'js-logger';
 
 export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     readonly options: ParsedSmartBannerOptions;
-    readonly platform: SupportedPlatForm;
+
+    /**
+     * If the platform is undefined, then it is not a supported platform.
+     * eg. a desktop environment (as this is intended for mobile)
+     */
+    readonly platform: SupportedPlatForm | undefined;
     readonly bannerId = 'smart-app-banner';
-
-    private __body: HTMLBodyElement | null = null;
     private __bannerElement: HTMLElement | null = null;
-
-    private __closeButton: HTMLElement | null = null;
-    private __callToActionButton: HTMLElement | null = null;
 
     constructor(options: SmartBannerOptions) {
         super();
 
         this.options = getSmartAppBannerOptions(options);
+
+        if (this.options.verbose) Logger.setLevel(Logger.DEBUG);
+
         this.platform = getCurrentPlatform();
 
         Logger.info('successfully initialised');
@@ -39,37 +42,60 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     // Lifecycle
 
     mount() {
-        this.__body = document.querySelector('body');
+        if (!this.platform) return;
 
-        if (!this.__body) {
-            Logger.error('Failed to mount (is the document ready yet?)');
+        // handle Safari separately and avoid creating a component
+        // https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners
+        if (this.platform === 'safari') {
+            this.setUpSafari();
             return;
         }
 
+        Logger.time('mounting banner');
+
         this.__bannerElement = document.createElement('div');
-        this.__bannerElement.outerHTML = this.html;
+        this.__bannerElement.innerHTML = this.html;
         this.__bannerElement.id = this.bannerId;
-        this.__body.prepend(this.__bannerElement);
 
-        this.__closeButton = document.querySelector('smartappbanner__close');
-        this.__closeButton?.addEventListener('click', this.onClickClose, false);
+        document.body.prepend(this.__bannerElement);
 
-        this.__callToActionButton = document.querySelector(
-            'smartappbanner__close',
-        );
-        this.__callToActionButton?.addEventListener(
-            'click',
-            this.onClickCallToAction,
-            false,
-        );
+        // bind "this" to event handlers
+        this.onClickClose = this.onClickClose.bind(this);
+        this.onClickCallToAction = this.onClickCallToAction.bind(this);
 
+        document
+            .querySelector('.smartappbanner__close')
+            ?.addEventListener('click', this.onClickClose, false);
+
+        document
+            .querySelector('.smartappbanner__view')
+            ?.addEventListener('click', this.onClickCallToAction, false);
+
+        Logger.debug('mounted banner');
+        Logger.timeEnd('mounting banner');
         this.dispatchEvent(new ReadyEvent());
     }
 
+    // You can’t display Smart App Banners inside a frame. Banners don’t appear in the iOS simulator.
+    setUpSafari() {
+        const metaTag = document.createElement('meta');
+        metaTag.name = 'apple-itunes-app';
+        metaTag.content = `app-id=${this.options.appleAppId}, app-argument=${this.options.appleAppArgumentUrl}`;
+        document.head.append(metaTag);
+        Logger.debug('added Safari configuration');
+    }
+
     destroy() {
-        if (!this.__bannerElement || !this.__body) return;
+        if (
+            !this.__bannerElement ||
+            !this.platform ||
+            this.platform === 'safari'
+        )
+            return;
+
         this.removeEventListeners();
-        this.__body.removeChild(this.__bannerElement);
+        this.__bannerElement.remove();
+        Logger.debug('destroyed banner');
         this.dispatchEvent(new DestroyedEvent());
     }
 
@@ -77,27 +103,22 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     // Event Handlers
 
     onClickClose(event: Event) {
-        this.destroy();
         event.preventDefault();
+        this.destroy();
     }
 
     onClickCallToAction(event: Event) {
         this.dispatchEvent(new ClickedCallToAction());
-        event.preventDefault();
     }
 
     removeEventListeners() {
-        this.__closeButton?.removeEventListener(
-            'click',
-            this.onClickClose,
-            false,
-        );
+        document
+            .querySelector('.smartappbanner__close')
+            ?.removeEventListener('click', this.onClickClose, false);
 
-        this.__callToActionButton?.removeEventListener(
-            'click',
-            this.onClickCallToAction,
-            false,
-        );
+        document
+            .querySelector('.smartappbanner__view')
+            ?.removeEventListener('click', this.onClickCallToAction, false);
     }
 
     // --------------------------------------------
@@ -117,7 +138,18 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
 
     get price() {
         if (this.platform === 'safari') return;
-        return this.options.price;
+
+        if (this.platform === 'android' && this.options.androidPrice) {
+            return this.options.androidPrice;
+        }
+
+        if (this.platform === 'ios' && this.options.applePrice) {
+            return this.options.applePrice;
+        }
+
+        // if there's really nothign by this point - validation has failed
+        // but we don't want to accidentally render null
+        return this.options.price ?? '';
     }
 
     get icon() {
@@ -131,7 +163,9 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
             return this.options.appleIcon;
         }
 
-        return this.options.icon;
+        // if there's really nothign by this point - validation has failed
+        // but we don't want to accidentally render null
+        return this.options.icon ?? '';
     }
 
     get buttonUrl() {
@@ -167,32 +201,32 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
             );
         }
 
-        return `<div class="smartappbanner">
-    <a href="#" class="smartappbanner__close" title="" href="nofollow" />
-    <div
-        class="smartappbanner__app-icon"
-        style="background-image: url(${this.icon})"
-    />
-    <div class="smartappbanner__info">
-        <div class="smartappbanner__description__title">
-            ${this.title}
-        </div>
-        <div class="smartappbanner__description__author">
-            ${this.author}
-        </div>
-        <div class="smartappbanner__description__price">
-            ${this.price}
-        </div>
+        return `
+<div class="smartappbanner">
+    <div class="smartappbanner__close">
+        <a
+            href="#"
+            href="nofollow"
+        ></a>
     </div>
-    <a
-        href="${this.buttonUrl}"
-        target="_blank"
-        rel="noopener"
-        aria-label="${this.buttonLabel}"
-        class="smartappbanner__view"
-    >
-        <span class="smartbanner__view__label"></span>
-    </a>
+	<div
+		class="smartappbanner__app-icon"
+		style="background-image: url(${this.icon})"
+	></div>
+	<div class="smartappbanner__description">
+		<div class="smartappbanner__description__title">${this.title}</div>
+		<div class="smartappbanner__description__author">${this.author}</div>
+		<div class="smartappbanner__description__price">${this.price}</div>
+	</div>
+	<a
+		href="${this.buttonUrl}"
+		target="_blank"
+		rel="noopener"
+		aria-label="${this.buttonLabel}"
+		class="smartappbanner__view"
+	>
+		<span class="smartbanner__view__label">${this.buttonLabel}</span>
+	</a>
 </div>
 `;
     }
