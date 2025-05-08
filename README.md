@@ -14,11 +14,12 @@ An Easy Smart App Banner for promoting mobile app installs based on the Safari A
 
 - Typescript support
 - Standalone/Frameworkless
-- Small! `15.59 kB │ gzip: 4.50 kB │ map: 50.44 kB`
+- Small! `16.60 kB │ gzip: 4.82 kB │ map: 55.09 kB`
 - Platform specific
   - custom banner for iOS (non-Safari) and Android user agents
   - Safari specific config
 - Option, use SCSS/Sass variables to configure the banner as needed
+- Cookie-based dismissal, dismiss once per browser
 
 ---
 
