@@ -20,7 +20,7 @@ import './assets/main.css';
 
 import { createApp } from 'vue';
 import App from './App.vue';
-import { type SmartBannerOptions } from '@easy-smart-app-banner/vue-plugin';
+import { createSmartAppBanner } from '@easy-smart-app-banner/vue-plugin';
 import { type SmartBannerOptions } from '@easy-smart-app-banner/core';
 
 createApp(App)
@@ -39,7 +39,7 @@ createApp(App)
 
 // App.vue
 <script setup lang="ts">
-import { useSmartAppBanner } from './smartAppBannerPlugin';
+import { useSmartAppBanner } from '@easy-smart-app-banner/vue-plugin';
 
 const smartAppBanner = useSmartAppBanner();
 
