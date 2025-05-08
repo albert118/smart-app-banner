@@ -4,7 +4,6 @@
 
 An Easy Smart App Banner for promoting mobile app installs based on the Safari Apple Experience.
 
-> [!NOTE]
 > This isn't for everyone. Most people should probably prefer the [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) approach. However, if you need a 'simple' banner that redirects to a _native_ mobile app then keep reading.
 >
 > For specific details on iOS and Safari specifically, read [here](https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners) and for Android see [here](https://developer.chrome.com/blog/app-install-banners-native/).
@@ -31,7 +30,7 @@ npm i -S @easy-smart-app-banner/core
 
 ## Configuration
 
-<https://github.com/albert118/smart-app-banner/blob/a3b0ec2a68090d45c64b79c2c92f09204f87bf05/src/models.ts#L1-L110>
+See [here](https://github.com/albert118/smart-app-banner/blob/a3b0ec2a68090d45c64b79c2c92f09204f87bf05/src/models.ts#L1-L110)
 
 ## Advanced Usage
 
@@ -77,9 +76,7 @@ The price tagline defaults to FREE with platform specific defaults for both Andr
 
 ### SCSS/Sass Variables
 
-Styles can be overriden using the provided SCSS/Sass variables.
-
-<https://github.com/albert118/smart-app-banner/blob/3b9011fa5b391e54901068a895253cebf2b539f6/src/styles/_vars.scss#L1-L8>
+Styles can be overriden using the provided SCSS/Sass variables. See [here](https://github.com/albert118/smart-app-banner/blob/3b9011fa5b391e54901068a895253cebf2b539f6/src/styles/_vars.scss#L1-L8).
 
 You can provide these styles as needed by using the `.scss` files instead,
 
@@ -108,13 +105,6 @@ npm run test
 You can checkout the rest of the commands in the [package.json](./package.json).
 
 The next step would be to boot a demo project. Checkout the Vue demo [here](https://github.com/albert118/smart-app-banner/tree/master/demo/vue).
-
-## TODO
-
-- [ ] change package name to avoid conflicts
-- [ ] cookie feature ("remember dismissal")
-- [ ] Vue 3 usage (plugin)
-- [ ] add badges
 
 ## Licence
 
