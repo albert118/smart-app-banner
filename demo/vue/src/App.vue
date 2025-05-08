@@ -2,7 +2,7 @@
 import Logger from 'js-logger';
 import HelloWorld from './components/HelloWorld.vue';
 import TheWelcome from './components/TheWelcome.vue';
-import { useSmartAppBanner } from './smartAppBannerPlugin';
+// import { useSmartAppBanner } from './smartAppBannerPlugin';
 
 const smartAppBanner = useSmartAppBanner();
 
