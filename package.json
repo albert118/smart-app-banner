@@ -1,7 +1,7 @@
 {
-    "name": "smart-app-banner",
-    "shortName": "Smart App Banner",
-    "description": "A Smart App Banner for promoting mobile app installs based on the Safari Apple Experience. Includes support for Safari too.",
+    "name": "@easy-smart-app-banner/core",
+    "shortName": "Easy Smart App Banner",
+    "description": "An Easy Smart App Banner for promoting mobile app installs based on the Safari Apple Experience. Includes support for Safari too.",
     "homepage": "https://github.com/albert118/smart-app-banner/",
     "author": "Albert Ferguson <albertferguson118@gmail.com>",
     "license": "MIT",
@@ -62,5 +62,8 @@
         "android",
         "smartbanner",
         "safari"
+    ],
+    "files": [
+        "dist"
     ]
 }
