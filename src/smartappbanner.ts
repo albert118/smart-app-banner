@@ -25,7 +25,6 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     readonly platform: SupportedPlatForm | undefined;
     readonly bannerId = 'smart-app-banner';
 
-    private __body: HTMLBodyElement | null = null;
     private __bannerElement: HTMLElement | null = null;
 
     private __closeButton: HTMLElement | null = null;
@@ -51,17 +50,11 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
 
         Logger.time('mounting banner');
 
-        this.__body = document.querySelector('body');
-
-        if (!this.__body) {
-            Logger.error('Failed to mount (is the document ready yet?)');
-            return;
-        }
-
         this.__bannerElement = document.createElement('div');
         this.__bannerElement.innerHTML = this.html;
         this.__bannerElement.id = this.bannerId;
-        this.__body.prepend(this.__bannerElement);
+
+        document.body.prepend(this.__bannerElement);
 
         this.__closeButton = document.querySelector('smartappbanner__close');
         this.__closeButton?.addEventListener('click', this.onClickClose, false);
@@ -81,9 +74,9 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     }
 
     destroy() {
-        if (!this.__bannerElement || !this.__body || !this.platform) return;
+        if (!this.__bannerElement || !this.platform) return;
         this.removeEventListeners();
-        this.__body.removeChild(this.__bannerElement);
+        this.__bannerElement.remove();
         Logger.debug('destroyed banner');
         this.dispatchEvent(new DestroyedEvent());
     }
@@ -92,8 +85,8 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     // Event Handlers
 
     onClickClose(event: Event) {
-        this.destroy();
         event.preventDefault();
+        this.destroy();
     }
 
     onClickCallToAction(event: Event) {
