@@ -2,8 +2,8 @@
     "extends": "./tsconfig.app.json",
     "include": [
         "src/**/*.spec.ts",
-        "**/*.ts",
-        "**/*.d.ts",
+        "src/**/*.ts",
+        "src/**/*.d.ts",
         "vitest.setup.ts",
         "vitest.config.ts"
     ],
