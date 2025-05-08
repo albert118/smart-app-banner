@@ -1,0 +1,5 @@
+{
+    "main": "./SmartAppBannerService.js",
+    "module": "./SmartAppBannerService.js",
+    "types": "./SmartAppBannerService.d.ts"
+}
