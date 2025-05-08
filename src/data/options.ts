@@ -18,6 +18,7 @@ export const DEFAULT_OPTIONS: Required<
     price: null,
     buttonLabel: 'View',
     verbose: false,
+    dismissPath: '/',
 
     // --------------------------------------------
     // Android Platform Options
@@ -81,6 +82,11 @@ export const OPTION_PARSERS: OptionParsers<
         Logger.debug('verbose logging enabled');
         // we have already asserted that the param is not undefined
         return verbose!;
+    },
+    dismissPath: (dismissPath, { defaultValue }) => {
+        if (dismissPath?.isFalsishOrEmpty()) return defaultValue;
+        // we have already asserted that the param is not undefined
+        return dismissPath!;
     },
     // --------------------------------------------
     // Android Platform Options

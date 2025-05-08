@@ -43,6 +43,16 @@ export type SmartBannerOptions = {
      */
     verbose?: boolean;
 
+    /**
+     * The path to hide the banner on once its dismissed. This allows conditionally rendering the banner
+     * on specific paths.
+     *
+     * SPA's should set '/' to apply hide/show the banner as expected (default behaviour)
+     *
+     * @default /
+     */
+    dismissPath?: string;
+
     // --------------------------------------------
     // Android Platform Options
 
@@ -120,6 +130,7 @@ export type ParsedSmartBannerOptions = {
     price: string | null;
     buttonLabel: string;
     verbose: boolean;
+    dismissPath: string;
 
     // --------------------------------------------
     // Android Platform Options

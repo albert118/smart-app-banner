@@ -7,7 +7,8 @@ import type { SmartAppBanner } from '../smartappbanner';
 export type SmartAppBannerEvents =
     | ReadyEvent
     | DestroyedEvent
-    | ClickedCallToAction;
+    | ClickedCallToAction
+    | ToggledVisibility;
 
 /**
  * Base class for all events dispatched by {@link SmartAppBanner}
@@ -47,5 +48,17 @@ export class ClickedCallToAction extends SmartAppBannerEvent {
     /** @internal */
     constructor() {
         super(ClickedCallToAction.type, true);
+    }
+}
+
+/**
+ * @event Triggered when the user clicks the dismiss button or programmatically toggles visiblity, provide an event.
+ */
+export class ToggledVisibility extends SmartAppBannerEvent {
+    static override readonly type = 'toggled-visibility';
+
+    /** @internal */
+    constructor() {
+        super(ToggledVisibility.type, true);
     }
 }
