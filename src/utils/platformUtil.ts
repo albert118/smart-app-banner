@@ -1,13 +1,17 @@
 import { type SupportedPlatForm } from '@models';
 import Logger from 'js-logger';
 
+// a good demo site for testing assumptions
+// http://detectmobilebrowsers.com/
+// a Gist "blog" on device detection
+// https://gist.github.com/dalethedeveloper/1503252
 export function getCurrentPlatform(): SupportedPlatForm | undefined {
     const userAgent = window.navigator.userAgent;
     let currentPlatform: SupportedPlatForm | undefined = undefined;
 
     Logger.debug('Current user agent: ', userAgent);
 
-    if (/Android/i.test(userAgent)) {
+    if (/Mobile|Android/i.test(userAgent)) {
         currentPlatform = 'android';
     }
 
@@ -26,12 +30,19 @@ export function getCurrentPlatform(): SupportedPlatForm | undefined {
     }
 
     // assert Safari after iOS to ensure we prefer Safari over non-Safari iOS browsers
-    if (/Safari/i.test(userAgent) && /Mobile/i.test(userAgent)) {
+
+    if (
+        /^(?=.*(iPhone|iPad|iPod))(?=.*AppleWebKit)(?!.*(criOS|fxiOS|opiOS|chrome|android)).*/i.test(
+            userAgent,
+        )
+    ) {
         currentPlatform = 'safari';
     }
 
     // undefined denotes an unsupported platform
     !currentPlatform && Logger.debug('The current platform is not supported');
+
+    Logger.debug('Resolved current platform as:', currentPlatform);
 
     return currentPlatform;
 }

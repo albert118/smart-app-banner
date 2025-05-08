@@ -49,6 +49,8 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     mount() {
         if (!this.platform) return;
 
+        Logger.time('mounting banner');
+
         this.__body = document.querySelector('body');
 
         if (!this.__body) {
@@ -73,6 +75,8 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
             false,
         );
 
+        Logger.debug('mounted banner');
+        Logger.timeEnd('mounting banner');
         this.dispatchEvent(new ReadyEvent());
     }
 
@@ -80,6 +84,7 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
         if (!this.__bannerElement || !this.__body || !this.platform) return;
         this.removeEventListeners();
         this.__body.removeChild(this.__bannerElement);
+        Logger.debug('destroyed banner');
         this.dispatchEvent(new DestroyedEvent());
     }
 

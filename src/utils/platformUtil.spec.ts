@@ -49,6 +49,13 @@ describe('getCurrentPlatform', () => {
         expect(getCurrentPlatform()).toBe('safari');
     });
 
+    test('should return "undefined" when userAgent contains Safari, Android, etc. but UA is typical Chrome', () => {
+        // @ts-ignore
+        window.navigator.userAgent =
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36';
+        expect(getCurrentPlatform()).toBeUndefined();
+    });
+
     test('should not throw SmartAppBannerError when platform cannot be determined', () => {
         // @ts-ignore
         window.navigator.userAgent = 'Mozilla/5.0 (X11; Linux x86_64)';
