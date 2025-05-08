@@ -1,6 +1,6 @@
 import Logger from 'js-logger';
 import * as events from './data/events';
-import './smartappbanner.scss';
+
 // ensure extensions are implemented
 import '@utils/stringUtils';
 
@@ -16,3 +16,8 @@ export type { SmartBannerOptions, ParsedSmartBannerOptions } from '@models';
 export { DEFAULT_OPTIONS, OPTION_PARSERS } from '@data/options';
 export { SmartAppBanner } from './smartappbanner';
 export { events };
+
+/**
+ * @internal
+ */
+import './styles/styles.scss';
