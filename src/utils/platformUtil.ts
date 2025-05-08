@@ -25,6 +25,7 @@ export function getCurrentPlatform(): SupportedPlatForm | undefined {
         currentPlatform = 'ios';
     }
 
+    // assert Safari after iOS to ensure we prefer Safari over non-Safari iOS browsers
     if (/Safari/i.test(userAgent) && /Mobile/i.test(userAgent)) {
         currentPlatform = 'safari';
     }

@@ -35,6 +35,9 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
         super();
 
         this.options = getSmartAppBannerOptions(options);
+
+        if (this.options.verbose) Logger.setLevel(Logger.DEBUG);
+
         this.platform = getCurrentPlatform();
 
         Logger.info('successfully initialised');
