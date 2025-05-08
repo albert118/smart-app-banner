@@ -110,7 +110,8 @@ describe('SmartAppBanner', () => {
             const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
             banner.onClickCallToAction(event);
             expect(ctaSpy).toHaveBeenCalled();
-            expect(preventDefaultSpy).toHaveBeenCalled();
+            // this should not be prevented, as the a tag has config to handle the URL
+            expect(preventDefaultSpy).not.toHaveBeenCalled();
         });
     });
 

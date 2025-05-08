@@ -108,7 +108,6 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     }
 
     onClickCallToAction(event: Event) {
-        event.preventDefault();
         this.dispatchEvent(new ClickedCallToAction());
     }
 
