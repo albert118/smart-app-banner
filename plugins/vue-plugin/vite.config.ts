@@ -38,9 +38,8 @@ export default defineConfig({
                     dest: 'dist',
                 },
                 {
-                    src: 'src/styles/_vars.scss',
+                    src: 'src/styles/variables.scss',
                     dest: 'dist',
-                    rename: `variables.scss`,
                 },
             ],
             // ensure it runs after bundle is written
@@ -51,9 +50,8 @@ export default defineConfig({
         sourcemap: true,
         lib: {
             entry: normalizePath(path.resolve(__dirname, 'src/index.ts')),
-            name: packageJson.name,
             formats: ['es'],
-            fileName: packageJson.name,
+            fileName: 'index',
             cssFileName: 'styles',
         },
     },
