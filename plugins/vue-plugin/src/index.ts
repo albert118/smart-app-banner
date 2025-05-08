@@ -21,8 +21,8 @@ import '@easy-smart-app-banner/core/style.css';
 /**
  * @internal
  */
-import '@easy-smart-app-banner/core/dist/style.scss';
+import '@easy-smart-app-banner/core/style.scss';
 /**
  * @internal
  */
-import '@easy-smart-app-banner/core/dist/variables.scss';
+import '@easy-smart-app-banner/core/variables.scss';

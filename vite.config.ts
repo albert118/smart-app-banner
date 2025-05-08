@@ -39,9 +39,8 @@ export default defineConfig({
                     dest: 'dist',
                 },
                 {
-                    src: 'src/styles/_vars.scss',
+                    src: 'src/styles/variables.scss',
                     dest: 'dist',
-                    rename: `variables.scss`,
                 },
             ],
             // ensure it runs after bundle is written
