@@ -17,8 +17,9 @@
         ".": {
             "import": "./dist/smart-app-banner.js"
         },
-        "./style.css": "./dist/smart-app-banner.css",
-        "./style.scss": "./dist/smart-app-banner.scss"
+        "./style.css": "./dist/styles.css",
+        "./style.scss": "./dist/styles.scss",
+        "./variables.scss": "./dist/variables.scss"
     },
     "scripts": {
         "build": "npm run build-only && npm run type-check",
@@ -44,6 +45,7 @@
         "happy-dom": "^17.4.6",
         "jsdom": "^26.0.0",
         "prettier": "3.5.3",
+        "rollup-plugin-copy": "^3.5.0",
         "sass-embedded": "^1.87.0",
         "typescript": "~5.8.0",
         "vite": "^6.3.5",
