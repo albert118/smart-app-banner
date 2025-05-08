@@ -17,8 +17,9 @@
         ".": {
             "import": "./dist/smart-app-banner.js"
         },
-        "./style.css": "./dist/smart-app-banner.css",
-        "./style.scss": "./dist/smart-app-banner.scss"
+        "./style.css": "./dist/styles.css",
+        "./style.scss": "./dist/styles.scss",
+        "./variables.scss": "./dist/variables.scss"
     },
     "scripts": {
         "build": "npm run build-only && npm run type-check",
