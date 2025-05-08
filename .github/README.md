@@ -16,11 +16,12 @@ An Easy Smart App Banner for promoting mobile app installs based on the Safari A
 
 - Typescript support
 - Standalone/Frameworkless
-- Small! `15.59 kB │ gzip: 4.50 kB │ map: 50.44 kB`
+- Small! `16.60 kB │ gzip: 4.82 kB │ map: 55.09 kB`
 - Platform specific
   - custom banner for iOS (non-Safari) and Android user agents
   - Safari specific config
 - Option, use SCSS/Sass variables to configure the banner as needed
+- Cookie-based dismissal, dismiss once per browser
 
 ---
 
@@ -95,7 +96,7 @@ $background-color: #000;
 
 > Looking for a platform that isn't here? Propose a PR to add it!
 
-* [Vue 3 Plugin](https://github.com/albert118/smart-app-banner/tree/master/plugins/vue-plugin)
+- [Vue 3 Plugin](https://github.com/albert118/smart-app-banner/tree/master/plugins/vue-plugin)
 
 ## Development
 
@@ -111,10 +112,6 @@ npm run test
 You can checkout the rest of the commands in the [package.json](./package.json).
 
 The next step would be to boot a demo project. Checkout the Vue demo [here](https://github.com/albert118/smart-app-banner/tree/master/demo/vue).
-
-## TODO
-
-- [ ] cookie feature ("remember dismissal")
 
 ## Licence
 

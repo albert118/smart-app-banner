@@ -88,9 +88,11 @@ You can provide these styles as needed by using the `.scss` files instead,
 $background-color: #000;
 ```
 
-### Vue usage (plugin TODO)
+### Platform Specific Plugins
 
-> TODO
+> Looking for a platform that isn't here? Propose a PR to add it!
+
+- [Vue 3 Plugin](https://github.com/albert118/smart-app-banner/tree/master/plugins/vue-plugin)
 
 ## Development
 
