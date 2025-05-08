@@ -1,6 +1,17 @@
 <script setup lang="ts">
+import Logger from 'js-logger';
 import HelloWorld from './components/HelloWorld.vue';
 import TheWelcome from './components/TheWelcome.vue';
+import { useSmartAppBanner } from './smartAppBannerPlugin';
+
+const smartAppBanner = useSmartAppBanner();
+
+try {
+    // mount the component
+    smartAppBanner.mount();
+} catch (error) {
+    Logger.error(error);
+}
 </script>
 
 <template>
