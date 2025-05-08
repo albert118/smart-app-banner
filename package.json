@@ -62,13 +62,5 @@
         "android",
         "smartbanner",
         "safari"
-    ],
-    "files": [
-        "dist",
-        "*.md",
-        "LICENSE",
-        "package-lock.json",
-        "package.json",
-        "src"
     ]
 }
