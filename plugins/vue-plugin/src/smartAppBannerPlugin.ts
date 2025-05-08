@@ -1,15 +1,6 @@
 import type { App, InjectionKey } from 'vue';
 import { SmartAppBanner, type SmartBannerOptions } from 'smart-app-banner';
-import 'smart-app-banner/style.css';
 import Logger from 'js-logger';
-
-Logger.useDefaults({
-    // default to warning until we disable it with options
-    defaultLevel: Logger.WARN,
-    formatter: function (messages, context) {
-        messages.unshift('[🛍️ Smart App Banner - Plugin]');
-    },
-});
 
 export const SmartAppBannerInjectionKey = Symbol(
     'SmartAppBanner',

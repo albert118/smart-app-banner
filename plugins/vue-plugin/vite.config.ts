@@ -32,6 +32,16 @@ export default defineConfig({
                     src: './package.json',
                     dest: `dist`,
                 },
+                // SCSS/Sass
+                {
+                    src: 'src/styles/styles.scss',
+                    dest: 'dist',
+                },
+                {
+                    src: 'src/styles/_vars.scss',
+                    dest: 'dist',
+                    rename: `variables.scss`,
+                },
             ],
             // ensure it runs after bundle is written
             hook: 'writeBundle',
