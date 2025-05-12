@@ -77,6 +77,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        justify-content: center;
 
         // match the height of the icon to align the info with it
         height: settings.$icon-size;
