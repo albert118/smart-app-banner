@@ -66,14 +66,21 @@ describe('getCurrentPlatform', () => {
     //     },
     // );
 
-    // test('should return "ios" for iPadOS 13+ with maxTouchPoints', () => {
-    //     // @ts-ignore
-    //     window.navigator.userAgent =
-    //         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5)';
-    //     // @ts-ignore
-    //     window.navigator.maxTouchPoints = 5;
-    //     expect(getCurrentPlatform()).toBe('ios');
-    // });
+    test.each([
+        // iPad OS 13 on Firefox
+        'Mozilla/5.0 (iPad; CPU iPad OS 13_5_1 like Mac OS X) AppleWebKit/536.0 (KHTML, like Gecko) FxiOS/12.5c0144.0 Mobile/48S760 Safari/536.0',
+        // iPad OS 17 on Chrome
+        'Mozilla/5.0 (iPad; CPU OS 17_5_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/134.0.6998.99 Mobile/15E148 Safari/604.1',
+    ])(
+        'should return "ios" for iPadOS 13+ device with maxTouchPoints NOT using Safari',
+        (testUserAgent: string) => {
+            // @ts-ignore
+            window.navigator.userAgent = testUserAgent;
+            // @ts-ignore
+            window.navigator.maxTouchPoints = 5;
+            expect(getCurrentPlatform()).toBe('ios');
+        },
+    );
 
     test.each([
         //  iPhone XR (Safari)

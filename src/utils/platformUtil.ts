@@ -31,12 +31,19 @@ export function getCurrentPlatform(): SupportedPlatForm | undefined {
             userAgent,
         );
 
+    // start by detecting iPads with touch enabled devices
     if (
-        (isTouchEnabledDevice && isNotSafariAppleDevice) ||
-        isNotSafariAppleDevice
+        isTouchEnabledDevice &&
+        /iPad(?=.*(criOS|fxiOS|opiOS|chrome|android))/i.test(userAgent)
     ) {
         currentPlatform = 'ios';
-    } else if (
+    }
+
+    if (isNotSafariAppleDevice) {
+        currentPlatform = 'ios';
+    }
+
+    if (
         /(?:iPhone|iPad|iPod)(?!.*(criOS|fxiOS|opiOS|chrome|android))/i.test(
             userAgent,
         )
