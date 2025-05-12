@@ -29,7 +29,7 @@
         "test": "vitest --watch false",
         "format": "prettier --write src/",
         "clean": "rm -rf ./dist",
-        "prepublish": "npm run clean && npm run build"
+        "prepublish": "npm run clean && npm run build && npm run test"
     },
     "engines": {
         "node": ">=20"
