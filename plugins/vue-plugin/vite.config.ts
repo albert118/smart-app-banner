@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import path from 'path';
-import packageJson from './package.json';
 import dts from 'vite-plugin-dts';
 import stripComments from 'vite-plugin-strip-comments';
 import copy from 'rollup-plugin-copy';
@@ -34,11 +33,11 @@ export default defineConfig({
                 },
                 // SCSS/Sass
                 {
-                    src: 'src/styles/styles.scss',
+                    src: './node_modules/@easy-smart-app-banner/core/dist/styles.scss',
                     dest: 'dist',
                 },
                 {
-                    src: 'src/styles/variables.scss',
+                    src: './node_modules/@easy-smart-app-banner/core/dist/variables.scss',
                     dest: 'dist',
                 },
             ],

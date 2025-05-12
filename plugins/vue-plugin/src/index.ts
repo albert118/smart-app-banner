@@ -1,4 +1,5 @@
 import Logger from 'js-logger';
+export * from '@easy-smart-app-banner/core';
 
 Logger.useDefaults({
     defaultLevel: Logger.WARN,
