@@ -2,9 +2,6 @@
 @use 'variables' as settings;
 
 .smartappbanner {
-    position: absolute;
-    top: 0;
-    left: 0;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -77,6 +74,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        justify-content: center;
 
         // match the height of the icon to align the info with it
         height: settings.$icon-size;
