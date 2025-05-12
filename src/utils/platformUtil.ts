@@ -11,31 +11,37 @@ export function getCurrentPlatform(): SupportedPlatForm | undefined {
 
     Logger.debug('Current user agent: ', userAgent);
 
-    if (/Mobile|Android/i.test(userAgent)) {
+    // ignore desktop user agents
+    if (/X11|Windows|Macintosh/i.test(userAgent)) {
+        return;
+    }
+
+    if (/android|windows phone/i.test(userAgent)) {
         currentPlatform = 'android';
     }
 
     // maxTouchPoints is the only effective method to detect iPad iOS 13+
     // FMI https://developer.apple.com/forums/thread/119186
     const maxTouchPoints = window.navigator.maxTouchPoints;
+    const isTouchEnabledDevice =
+        !window.MSStream && maxTouchPoints && maxTouchPoints > 0;
+
+    const isNotSafariAppleDevice =
+        /(?:iPhone|iPad|iPod)(?=.*(criOS|fxiOS|opiOS|chrome|android))/i.test(
+            userAgent,
+        );
 
     if (
-        (!window.MSStream &&
-            !/X11|Linux|Windows/i.test(userAgent) &&
-            maxTouchPoints &&
-            maxTouchPoints > 0) ||
-        /iPhone|iPad|iPod/i.test(userAgent)
+        (isTouchEnabledDevice && isNotSafariAppleDevice) ||
+        isNotSafariAppleDevice
     ) {
         currentPlatform = 'ios';
-    }
-
-    // assert Safari after iOS to ensure we prefer Safari over non-Safari iOS browsers
-
-    if (
-        /^(?=.*(iPhone|iPad|iPod))(?=.*AppleWebKit)(?!.*(criOS|fxiOS|opiOS|chrome|android)).*/i.test(
+    } else if (
+        /(?:iPhone|iPad|iPod)(?!.*(criOS|fxiOS|opiOS|chrome|android))/i.test(
             userAgent,
         )
     ) {
+        // assert Safari after iOS to ensure we prefer Safari over non-Safari iOS browsers
         currentPlatform = 'safari';
     }
 
