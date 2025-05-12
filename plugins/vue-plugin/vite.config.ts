@@ -32,13 +32,12 @@ export default defineConfig({
                     dest: `dist`,
                 },
                 // SCSS/Sass
-                // TODO: this is missing
                 {
-                    src: '@easy-smart-app-banner/core/styles.scss',
+                    src: './node_modules/@easy-smart-app-banner/core/dist/styles.scss',
                     dest: 'dist',
                 },
                 {
-                    src: '@easy-smart-app-banner/core/variables.scss',
+                    src: './node_modules/@easy-smart-app-banner/core/dist/variables.scss',
                     dest: 'dist',
                 },
             ],
