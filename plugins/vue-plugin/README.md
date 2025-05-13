@@ -72,6 +72,17 @@ You can checkout the rest of the commands in the [package.json](./package.json).
 
 The next step would be to boot up the dependent project, as you're probably looking to edit it too. See [here](https://github.com/albert118/smart-app-banner).
 
+### Publish a Release
+
+1. Checkout a new branch `release/vue-plugin-major.minor.patch`
+2. update the core package dependency (if needed) and run `npm i`
+3. execute `npm run build`
+4. Update any docs as needed
+5. Create the new version using `npm version major|minor|patch`
+6. Publish the branch
+
+Having merged the PR for that branch... Publish the latest plugin to npm using `npm publish --access public`.
+
 ## Licence
 
 [MIT](./LICENSE) License © 2025-PRESENT [Albert Ferguson](https://github.com/albert118/)
