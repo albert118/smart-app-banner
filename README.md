@@ -109,6 +109,15 @@ You can checkout the rest of the commands in the [package.json](./package.json).
 
 The next step would be to boot a demo project. Checkout the Vue demo [here](https://github.com/albert118/smart-app-banner/tree/master/demo/vue).
 
+### Publish a Release
+
+1. Checkout a new branch `release/major.minor.patch`
+2. Create the new version using `npm version major|minor|patch`
+3. Update any docs as needed
+4. Publish the branch
+
+Having merged the PR for that branch... Generate a release with a matching tag for the newly created version.
+
 ## Licence
 
 [MIT](./LICENSE) License © 2025-PRESENT [Albert Ferguson](https://github.com/albert118/)
