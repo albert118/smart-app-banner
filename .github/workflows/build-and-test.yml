@@ -11,6 +11,7 @@ on:
     push:
         paths:
             - 'src/**'
+            - '.github/workflows/build-and-test.yml'
 
 jobs:
     build-and-test:
