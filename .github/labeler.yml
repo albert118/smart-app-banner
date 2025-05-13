@@ -1,0 +1,45 @@
+bug:
+    - head-branch: ['^bug']
+
+documentation:
+    - head-branch: ['^documentation']
+    - changed-files:
+          - any-glob-to-any-file: ['*.md']
+
+housekeeping:
+    - head-branch: ['^housekeeping']
+    - changed-files:
+          - any-glob-to-any-file:
+                [
+                    '.*ignore',
+                    '.eslint*',
+                    '.prettier*',
+                    'LICENCE',
+                    '.gitignore',
+                    '.gitconfig',
+                ]
+
+infrastructure:
+    - head-branch: ['^infrastructure']
+    - changed-files:
+          - any-glob-to-any-file:
+                [
+                    '*.yml',
+                    'Docker',
+                    '*.config',
+                    'package.json',
+                    '.config/**',
+                    '.github/**',
+                ]
+
+enhancement:
+    - head-branch: ['^enhancement']
+
+plugin:
+    - changed-files:
+          - any-glob-to-any-file: ['plugins/**']
+
+dependencies:
+    - changed-files:
+          - any-glob-to-any-file:
+                ['package.json', 'package-lock.json', '.node-version']
