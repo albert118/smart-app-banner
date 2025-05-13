@@ -8,7 +8,6 @@ on:
             - synchronize
             - reopened
             - ready_for_review
-    push:
         paths:
             - 'src/**'
             - '.github/workflows/build-and-test.yml'
