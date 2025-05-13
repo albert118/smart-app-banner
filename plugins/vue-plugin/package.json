@@ -8,7 +8,7 @@
     "bugs": {
         "url": "https://github.com/albert118/smart-app-banner/issues"
     },
-    "version": "1.0.7",
+    "version": "1.0.9",
     "private": false,
     "type": "module",
     "main": "./dist/index.js",
@@ -29,7 +29,7 @@
         "test": "echo No tests found!",
         "format": "prettier --write src/",
         "clean": "rm -rf ./dist",
-        "prepublish": "npm run clean && npm run build && npm run test"
+        "prepublish": "npm run clean && npm run build"
     },
     "engines": {
         "node": ">=20"
