@@ -13,8 +13,6 @@ jobs:
             contents: read
             pull-requests: write
         runs-on: ubuntu-latest
-        permissions:
-          pull-requests: write
         steps:
             - uses: actions/labeler@v5
               with:
