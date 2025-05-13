@@ -2,7 +2,6 @@ bug:
     - head-branch: ['^bug']
 
 documentation:
-    - head-branch: ['^documentation']
     - changed-files:
           - any-glob-to-any-file: ['*.md']
 
