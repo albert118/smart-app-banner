@@ -1,6 +1,5 @@
 # Build and test the core package
 name: 'Build and Test'
-
 on:
     pull_request:
         types:
@@ -11,12 +10,9 @@ on:
         paths:
             - 'src/**'
             - '.github/workflows/build-and-test.yml'
-
 jobs:
     build-and-test:
-        if: github.event.pull_request.draft == false
         runs-on: ubuntu-latest
-
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
