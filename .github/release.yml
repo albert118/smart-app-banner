@@ -1,0 +1,18 @@
+# .github/release.yml
+
+changelog:
+    categories:
+        - title: 🎉 Exciting New Features
+          labels:
+              - enhancement
+              - plugin
+        - title: 🐞 Bug fixes
+          labels:
+              - bug
+        - title: 🏗️ Infrastructure
+          labels:
+              - infrastructure
+        - title: 🏡 Housekeeping
+          labels:
+              - dependencies
+              - documenation
