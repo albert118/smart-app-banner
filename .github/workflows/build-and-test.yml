@@ -1,5 +1,5 @@
 # Build and test the core package
-name: Build and Test
+name: 'Build and Test'
 
 on:
     pull_request:
@@ -8,9 +8,9 @@ on:
             - synchronize
             - reopened
             - ready_for_review
-    push:
         paths:
             - 'src/**'
+            - '.github/workflows/build-and-test.yml'
 
 jobs:
     build-and-test:
@@ -18,7 +18,6 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Use Node.js
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
               with:
