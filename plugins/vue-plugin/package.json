@@ -42,7 +42,7 @@
         "@easy-smart-app-banner/core": "^2.0.0",
         "@vueuse/core": "^13.0.0",
         "js-logger": "^1.6.1",
-        "typescript": "^5.8.2",
+        "typescript": "^5.9.2",
         "vue": "^3.5.13"
     },
     "devDependencies": {
@@ -55,9 +55,9 @@
         "prettier": "3.5.3",
         "rollup-plugin-copy": "^3.5.0",
         "sass-embedded": "^1.87.0",
-        "typescript": "~5.8.0",
+        "typescript": "~5.9.2",
         "vite": "^6.3.5",
-        "vite-plugin-dts": "^4.5.3",
+        "vite-plugin-dts": "^4.5.4",
         "vite-plugin-static-copy": "^3.0.0",
         "vite-plugin-strip-comments": "^0.0.5",
         "vue-tsc": "^2.2.10"
