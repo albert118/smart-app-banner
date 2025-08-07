@@ -11,7 +11,7 @@ import {
     SmartAppBannerError,
     type ParsedSmartBannerOptions,
     type SmartBannerOptions,
-    type SupportedPlatForm,
+    type ParsedPlatform,
 } from '@models';
 import { getCurrentPlatform } from '@utils/platformUtil';
 import Logger from 'js-logger';
@@ -24,7 +24,7 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
      * If the platform is undefined, then it is not a supported platform.
      * eg. a desktop environment (as this is intended for mobile)
      */
-    readonly platform: SupportedPlatForm | undefined;
+    readonly platform: ParsedPlatform | undefined;
     readonly bannerId = 'smart-app-banner';
     private __bannerElement: HTMLElement | null = null;
 

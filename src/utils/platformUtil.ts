@@ -1,13 +1,13 @@
-import { type SupportedPlatForm } from '@models';
+import { type ParsedPlatform } from '@models';
 import Logger from 'js-logger';
 
 // a good demo site for testing assumptions
 // http://detectmobilebrowsers.com/
 // a Gist "blog" on device detection
 // https://gist.github.com/dalethedeveloper/1503252
-export function getCurrentPlatform(): SupportedPlatForm | undefined {
+export function getCurrentPlatform(): ParsedPlatform | undefined {
     const userAgent = window.navigator.userAgent;
-    let currentPlatform: SupportedPlatForm | undefined = undefined;
+    let currentPlatform: ParsedPlatform | undefined = undefined;
 
     Logger.debug('Current user agent: ', userAgent);
 
