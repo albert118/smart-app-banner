@@ -89,20 +89,6 @@ export type SmartBannerOptions = {
     appStoreUrl?: string;
 
     /**
-     * Sets the Apple app store ID. This IS required if enableSafariSupport is true
-     *
-     * @see https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners
-     */
-    appleAppId?: string;
-
-    /**
-     * Sets the argument URL parsed to Safari browsers.
-     *
-     * @see https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners#Provide-Navigational-Context-to-Your-App
-     */
-    appleAppArgumentUrl?: string;
-
-    /**
      * Apple specific button label. If not specified, falls back to buttonLabel.
      */
     appleButtonLabel?: string;
@@ -142,8 +128,6 @@ export type ParsedSmartBannerOptions = {
     // --------------------------------------------
     // Apple Platform Options
     appStoreUrl: URL | null;
-    appleAppId: string | null;
-    appleAppArgumentUrl: URL | null;
     appleButtonLabel: string | null;
     appleIcon: string | null;
     applePrice: string;

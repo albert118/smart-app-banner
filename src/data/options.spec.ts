@@ -174,47 +174,6 @@ describe('options', () => {
             }),
         ).toEqual(new URL(url));
     });
-
-    test('throws if appleAppId is falsish with safari platform', () => {
-        expect(() =>
-            OPTION_PARSERS.appleAppId('', {
-                defaultValue: null,
-                // @ts-ignore
-                rawOptions: { platforms: ['safari'] },
-            }),
-        ).toThrow(SmartAppBannerError);
-    });
-
-    test('returns valid appleAppId', () => {
-        expect(
-            OPTION_PARSERS.appleAppId('12345', {
-                defaultValue: null,
-                // @ts-ignore
-                rawOptions: { platforms: ['safari'] },
-            }),
-        ).toBe('12345');
-    });
-
-    test('throws if appleAppArgumentUrl is invalid', () => {
-        expect(() =>
-            OPTION_PARSERS.appleAppArgumentUrl('bad-url', {
-                defaultValue: null,
-                // @ts-ignore
-                rawOptions: { platforms: ['safari'] },
-            }),
-        ).toThrow(SmartAppBannerError);
-    });
-
-    test('returns valid appleAppArgumentUrl', () => {
-        const url = 'https://example.com';
-        expect(
-            OPTION_PARSERS.appleAppArgumentUrl(url, {
-                defaultValue: null,
-                // @ts-ignore
-                rawOptions: { platforms: ['safari'] },
-            }),
-        ).toEqual(new URL(url));
-    });
 });
 
 describe('getSmartAppBannerOptions', () => {
@@ -264,10 +223,6 @@ describe('getSmartAppBannerOptions', () => {
         expect(result.appleIcon).toBeNull();
         expect(result.appleButtonLabel).toBeNull();
         expect(result.applePrice).toBe('GET - On the App Store');
-
-        // Safari options should be disabled
-        expect(result.appleAppId).toBeNull();
-        expect(result.appleAppArgumentUrl).toBeNull();
     });
 
     test('parses known options correctly for Apple', () => {
@@ -279,8 +234,6 @@ describe('getSmartAppBannerOptions', () => {
             price: '$1.99',
             buttonLabel: 'Get test',
             appStoreUrl: 'https://apps.apple.com',
-            appleAppId: '12345',
-            appleAppArgumentUrl: 'https://example.com',
             appleIcon: 'apple-icon.png',
             appleButtonLabel: 'Download',
             applePrice: 'Free',
@@ -304,10 +257,6 @@ describe('getSmartAppBannerOptions', () => {
         expect(result.appleIcon).toBe('apple-icon.png');
         expect(result.appleButtonLabel).toBe('Download');
         expect(result.applePrice).toBe('Free');
-
-        // Safari options should be disabled
-        expect(result.appleAppId).toBeNull();
-        expect(result.appleAppArgumentUrl).toBeNull();
     });
 
     test('parses known options correctly for Safari', () => {
@@ -318,8 +267,6 @@ describe('getSmartAppBannerOptions', () => {
             platforms: ['safari'],
             price: '$99.99',
             buttonLabel: 'Get tested',
-            appleAppId: '12345',
-            appleAppArgumentUrl: 'https://example.com',
         };
 
         const result = getSmartAppBannerOptions(options);
@@ -340,11 +287,5 @@ describe('getSmartAppBannerOptions', () => {
         expect(result.appleIcon).toBeNull();
         expect(result.appleButtonLabel).toBeNull();
         expect(result.applePrice).toBe('GET - On the App Store');
-
-        // Safari options should be disabled
-        expect(result.appleAppId).toBe('12345');
-        expect(result.appleAppArgumentUrl).toEqual(
-            new URL('https://example.com'),
-        );
     });
 });

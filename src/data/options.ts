@@ -30,8 +30,6 @@ export const DEFAULT_OPTIONS: Required<
     // --------------------------------------------
     // Apple Platform Options
     appStoreUrl: null,
-    appleAppId: null,
-    appleAppArgumentUrl: null,
     appleButtonLabel: null,
     appleIcon: null,
     applePrice: 'GET - On the App Store',
@@ -141,32 +139,6 @@ export const OPTION_PARSERS: OptionParsers<
             return new URL(appStoreUrl!);
         } catch (error) {
             throw new SmartAppBannerError(reason);
-        }
-    },
-    appleAppId: (appleAppId, { rawOptions }) => {
-        if (!rawOptions.platforms?.includes('safari')) return null;
-
-        if (appleAppId?.isFalsishOrEmpty()) {
-            throw new SmartAppBannerError(
-                `The Safari platform was enabled but no valid Apple app ID has been configured. Provided app ID was "${appleAppId}"`,
-            );
-        }
-
-        // we have already asserted that the param is not undefined
-        return appleAppId!;
-    },
-    appleAppArgumentUrl: (appleAppArgumentUrl, { rawOptions }) => {
-        if (!rawOptions.platforms?.includes('safari')) return null;
-        // this param is optional, if it wasn't specified this is still valid
-        if (appleAppArgumentUrl?.isFalsishOrEmpty()) return null;
-
-        try {
-            // we have already asserted that the param is not undefined
-            return new URL(appleAppArgumentUrl!);
-        } catch (error) {
-            throw new SmartAppBannerError(
-                `The Safari platform was enabled but an invalid app argument URL was specified. Provided app argument URL was "${appleAppArgumentUrl}"`,
-            );
         }
     },
     appleButtonLabel: (appleButtonLabel, { rawOptions }) => {

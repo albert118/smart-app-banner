@@ -46,12 +46,9 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
     mount() {
         if (!this.platform) return;
 
-        // handle Safari separately and avoid creating a component
+        // Safari will only recognise the relevant config if it is present immediately on page load - it cannot be handled by a plugin/library
         // https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners
-        if (this.platform === 'safari') {
-            this.setUpSafari();
-            return;
-        }
+        if (this.platform === 'safari') return;
 
         const dismissalCookie = useDismissalCookie();
         if (dismissalCookie.isDismissed()) return;
@@ -79,15 +76,6 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
         Logger.debug('mounted banner');
         Logger.timeEnd('mounting banner');
         this.dispatchEvent(new ReadyEvent());
-    }
-
-    // You can’t display Smart App Banners inside a frame. Banners don’t appear in the iOS simulator.
-    setUpSafari() {
-        const metaTag = document.createElement('meta');
-        metaTag.name = 'apple-itunes-app';
-        metaTag.content = `app-id=${this.options.appleAppId}, app-argument=${this.options.appleAppArgumentUrl}`;
-        document.head.append(metaTag);
-        Logger.debug('added Safari configuration');
     }
 
     destroy() {

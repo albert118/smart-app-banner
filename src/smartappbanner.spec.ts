@@ -161,7 +161,7 @@ describe('SmartAppBanner', () => {
             expect(document.querySelector(banner.bannerId)).toBeNull();
         });
 
-        test('should add Safari meta tag', async () => {
+        test('should NOT add Safari meta tag', async () => {
             (getCurrentPlatform as any).mockReturnValue('safari');
             // dynamically import to ensure mocking order of operations is as expected
             const { SmartAppBanner } = await import('./smartappbanner');
@@ -180,10 +180,8 @@ describe('SmartAppBanner', () => {
                 ...document.head.querySelectorAll('meta'),
             ].find(meta => meta.name === 'apple-itunes-app');
 
-            expect(safariMetaTag).toBeDefined();
-            expect(safariMetaTag!.content).toMatch(
-                `app-id=${safariOptions.appleAppId}, app-argument=${safariOptions.appleAppArgumentUrl}`,
-            );
+            // because we cannot support Safari meta tags using a plugin/library, this metadata must be present immediately on page load
+            expect(safariMetaTag).not.toBeDefined();
         });
 
         test('should throw an error when attempting to resolve HTML for Safari', async () => {
