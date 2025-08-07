@@ -1,4 +1,8 @@
-export type SupportedPlatForm = 'android' | 'ios' | 'safari';
+// indirectly used for type assertions during option building (ie. "is this option relevant to platform 'X'?")
+export type SupportedPlatForm = 'android' | 'ios';
+
+// we maintain Safari here to allow checks to skip the platform
+export type ParsedPlatform = 'android' | 'ios' | 'safari';
 
 export type SmartBannerOptions = {
     title: string;
@@ -12,9 +16,6 @@ export type SmartBannerOptions = {
 
     /**
      * Enabled platforms. If a platform is enabled here it must be configured.
-     *
-     * If 'safari' is included, then the native Safari banner will be enabled and require additional configuration.
-     * Ensure that the appleAppId and (optionally) the appleAppArgumentUrl.
      *
      * @see https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners
      * @default ['android', 'ios']
@@ -89,20 +90,6 @@ export type SmartBannerOptions = {
     appStoreUrl?: string;
 
     /**
-     * Sets the Apple app store ID. This IS required if enableSafariSupport is true
-     *
-     * @see https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners
-     */
-    appleAppId?: string;
-
-    /**
-     * Sets the argument URL parsed to Safari browsers.
-     *
-     * @see https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners#Provide-Navigational-Context-to-Your-App
-     */
-    appleAppArgumentUrl?: string;
-
-    /**
      * Apple specific button label. If not specified, falls back to buttonLabel.
      */
     appleButtonLabel?: string;
@@ -142,8 +129,6 @@ export type ParsedSmartBannerOptions = {
     // --------------------------------------------
     // Apple Platform Options
     appStoreUrl: URL | null;
-    appleAppId: string | null;
-    appleAppArgumentUrl: URL | null;
     appleButtonLabel: string | null;
     appleIcon: string | null;
     applePrice: string;
