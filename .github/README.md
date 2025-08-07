@@ -8,7 +8,9 @@ An Easy Smart App Banner for promoting mobile app installs based on the Safari A
 > [!NOTE]
 > This isn't for everyone. Most people should probably prefer the [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) approach. However, if you need a 'simple' banner that redirects to a _native_ mobile app then keep reading.
 >
-> For specific details on iOS and Safari specifically, read [here](https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners) and for Android see [here](https://developer.chrome.com/blog/app-install-banners-native/).
+> For Safari support see [Safari Support](#safari-support).
+> For specific details on iOS and Safari, read [here](https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners).
+> Likewise for Android see [here](https://developer.chrome.com/blog/app-install-banners-native/).
 
 <img src='https://github.com/user-attachments/assets/de1387da-e51a-4851-9a64-345dbf0349ce' style='width: 69%;' />
 
@@ -19,7 +21,7 @@ An Easy Smart App Banner for promoting mobile app installs based on the Safari A
 - Small! `16.60 kB │ gzip: 4.82 kB │ map: 55.09 kB`
 - Platform specific
   - custom banner for iOS (non-Safari) and Android user agents
-  - Safari specific config
+  - ~~Safari specific config~~ See [Safari Support](#safari-support)
 - Option, use SCSS/Sass variables to configure the banner as needed
 - Cookie-based dismissal, dismiss once per browser
 
@@ -34,6 +36,10 @@ npm i -S @easy-smart-app-banner/core
 ## Configuration
 
 <https://github.com/albert118/smart-app-banner/blob/a3b0ec2a68090d45c64b79c2c92f09204f87bf05/src/models.ts#L1-L110>
+
+## Safari Support
+
+This libary currently excludes Safari, as it is not possible to support Safari via a library/plugin/etc. Support for the native Safari smart app banner MUST be provided via static meta tags in your site directly. Safari currently only supports parsing this metadata immediately on page load and will not parse any metadata added after this point. If you want to natively include the Safari banner, then read on [here](https://developer.apple.com/documentation/webkit/promoting-apps-with-smart-app-banners).
 
 ## Advanced Usage
 
