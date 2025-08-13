@@ -79,9 +79,11 @@ The next step would be to boot up the dependent project, as you're probably look
 3. execute `npm run build`
 4. Update any docs as needed
 5. Create the new version using `npm version major|minor|patch`
-6. Publish the branch
+6. Publish, review, and merge the branch
+7. Publish the latest plugin package to NPM using `npm publish --access public`
+8. Validate the install and version by bumping the [vue-demo](../../demo/vue/README.md) project
 
-Having merged the PR for that branch... Publish the latest plugin to npm using `npm publish --access public`.
+Done! 🎈
 
 ## Licence
 

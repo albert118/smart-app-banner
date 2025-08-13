@@ -8,7 +8,7 @@
     "bugs": {
         "url": "https://github.com/albert118/smart-app-banner/issues"
     },
-    "version": "2.0.1",
+    "version": "2.1.0",
     "private": false,
     "type": "module",
     "main": "./dist/index.js",
@@ -39,15 +39,14 @@
         "url": "git+https://github.com/albert118/smart-app-banner.git"
     },
     "dependencies": {
-        "@easy-smart-app-banner/core": "^2.0.0",
+        "@easy-smart-app-banner/core": "^2.1.0",
         "@vueuse/core": "^13.0.0",
         "js-logger": "^1.6.1",
         "typescript": "^5.9.2",
         "vue": "^3.5.13"
     },
     "devDependencies": {
-        "@vitejs/plugin-vue": "^5.2.3",
-        "@vue/compiler-sfc": "^3.5.13",
+        "@vitejs/plugin-vue": "^6.0.1",
         "@types/jsdom": "^21.1.7",
         "@types/node": "^24.2.1",
         "happy-dom": "^18.0.1",
