@@ -42,7 +42,7 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
             window.getCurrentPlatform = getCurrentPlatform;
         }
 
-        this.platform = getCurrentPlatform();
+        this.platform = getCurrentPlatform(window.navigator.userAgent);
 
         Logger.info('successfully initialised');
     }

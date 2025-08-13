@@ -34,8 +34,7 @@ describe('getCurrentPlatform', () => {
         'should return "android" for known Android userAgents',
         (testUserAgent: string) => {
             // @ts-ignore
-            window.navigator.userAgent = testUserAgent;
-            expect(getCurrentPlatform()).toBe('android');
+            expect(getCurrentPlatform(testUserAgent)).toBe('android');
         },
     );
 
@@ -47,9 +46,7 @@ describe('getCurrentPlatform', () => {
     ])(
         'should return "ios" when userAgent is an iOS mobile device NOT using Safari',
         (testUserAgent: string) => {
-            // @ts-ignore
-            window.navigator.userAgent = testUserAgent;
-            expect(getCurrentPlatform()).toBe('ios');
+            expect(getCurrentPlatform(testUserAgent)).toBe('ios');
         },
     );
 
@@ -75,10 +72,8 @@ describe('getCurrentPlatform', () => {
         'should return "ios" for iPadOS 13+ device with maxTouchPoints NOT using Safari',
         (testUserAgent: string) => {
             // @ts-ignore
-            window.navigator.userAgent = testUserAgent;
-            // @ts-ignore
             window.navigator.maxTouchPoints = 5;
-            expect(getCurrentPlatform()).toBe('ios');
+            expect(getCurrentPlatform(testUserAgent)).toBe('ios');
         },
     );
 
@@ -92,9 +87,7 @@ describe('getCurrentPlatform', () => {
     ])(
         'should return "safari" when Safari iOS mobile devices',
         (testUserAgent: string) => {
-            // @ts-ignore
-            window.navigator.userAgent = testUserAgent;
-            expect(getCurrentPlatform()).toBe('safari');
+            expect(getCurrentPlatform(testUserAgent)).toBe('safari');
         },
     );
 
@@ -107,20 +100,17 @@ describe('getCurrentPlatform', () => {
     ])(
         'should return "undefined" when userAgent is a desktop environment (regardless if it contains "Safari")',
         (testUserAgent: string) => {
-            // @ts-ignore
-            window.navigator.userAgent = testUserAgent;
-            expect(getCurrentPlatform()).toBeUndefined();
+            expect(getCurrentPlatform(testUserAgent)).toBeUndefined();
         },
     );
 
     test('should not throw SmartAppBannerError when platform cannot be determined', () => {
-        // @ts-ignore
-        window.navigator.userAgent =
+        const bogusUserAgent =
             '23324758327580923798013 garbage !! df9 &^S%D$^R!F!*TGF | |A|WR B|AWR@#54 yA';
         // @ts-ignore
         window.navigator.maxTouchPoints = 0;
-        expect(() => getCurrentPlatform()).not.toThrow();
-        const result = getCurrentPlatform();
+        expect(() => getCurrentPlatform(bogusUserAgent)).not.toThrow();
+        const result = getCurrentPlatform(bogusUserAgent);
         expect(result).toBeUndefined();
     });
 });

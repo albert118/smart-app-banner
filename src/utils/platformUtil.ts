@@ -5,8 +5,9 @@ import Logger from 'js-logger';
 // http://detectmobilebrowsers.com/
 // a Gist "blog" on device detection
 // https://gist.github.com/dalethedeveloper/1503252
-export function getCurrentPlatform(): ParsedPlatform | undefined {
-    const userAgent = window.navigator.userAgent;
+export function getCurrentPlatform(
+    userAgent: string,
+): ParsedPlatform | undefined {
     let currentPlatform: ParsedPlatform | undefined = undefined;
 
     Logger.debug('Current user agent: ', userAgent);
