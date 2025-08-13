@@ -3,12 +3,12 @@
 
 .smartappbanner {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    gap: 10px;
 
     // clipping is better than tiny scrollbars
     overflow: hidden;
-    width: 100%;
     height: 80px;
     background-color: settings.$background-color;
     font-family: settings.$font;

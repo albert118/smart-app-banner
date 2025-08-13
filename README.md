@@ -100,6 +100,17 @@ $background-color: #000;
 
 - [Vue 3 Plugin](https://github.com/albert118/smart-app-banner/tree/master/plugins/vue-plugin)
 
+### Testing if your User Agent (UA) String is Valid
+
+UA strings are a dime a dozen, that's why in `verbose` mode (see [Configuration](#configuration)), the platform parsing utility is exposed to the window object for easy testing. In your browser console,
+
+```sh
+const myUa = window.navigator.userAgent;
+getCurrentPlatform(myUa)
+```
+
+This is especially useful when debugging known UA strings that may not be supported. If you think a particular UA should be supported, open a pull request!
+
 ## Development
 
 To get started, pull the repo and run a build as well as the tests.

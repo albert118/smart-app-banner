@@ -4,14 +4,19 @@ import HelloWorld from '@components/HelloWorld.vue';
 import TheWelcome from '@components/TheWelcome.vue';
 import { useSmartAppBanner } from '@easy-smart-app-banner/vue-plugin';
 
+Logger.useDefaults();
+var demoLogger = Logger.get('Demo');
+demoLogger.setLevel(Logger.DEBUG);
+
 const smartAppBanner = useSmartAppBanner();
 
 try {
     // mount the component
     smartAppBanner.mount();
+    demoLogger.info('demo will now attempt to mount the banner');
 } catch (error) {
     // catch any errors gracefully if there's any config or platform issues
-    Logger.error(error);
+    demoLogger.error(error);
 }
 </script>
 

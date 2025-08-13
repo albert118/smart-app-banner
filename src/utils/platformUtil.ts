@@ -5,42 +5,23 @@ import Logger from 'js-logger';
 // http://detectmobilebrowsers.com/
 // a Gist "blog" on device detection
 // https://gist.github.com/dalethedeveloper/1503252
-export function getCurrentPlatform(): ParsedPlatform | undefined {
-    const userAgent = window.navigator.userAgent;
+export function getCurrentPlatform(
+    userAgent: string,
+): ParsedPlatform | undefined {
     let currentPlatform: ParsedPlatform | undefined = undefined;
 
     Logger.debug('Current user agent: ', userAgent);
 
+    // maxTouchPoints is the only effective method to detect iPad iOS 13+
+    const hasManyTouchPoints = !!(window.navigator.maxTouchPoints > 2);
+
     // ignore desktop user agents
-    if (/X11|Windows|Macintosh/i.test(userAgent)) {
+    if (/X11|Windows|Macintosh/i.test(userAgent) && !hasManyTouchPoints) {
         return;
     }
 
     if (/android|windows phone/i.test(userAgent)) {
         currentPlatform = 'android';
-    }
-
-    // maxTouchPoints is the only effective method to detect iPad iOS 13+
-    // FMI https://developer.apple.com/forums/thread/119186
-    const maxTouchPoints = window.navigator.maxTouchPoints;
-    const isTouchEnabledDevice =
-        !window.MSStream && maxTouchPoints && maxTouchPoints > 0;
-
-    const isNotSafariAppleDevice =
-        /(?:iPhone|iPad|iPod)(?=.*(criOS|fxiOS|opiOS|chrome|android))/i.test(
-            userAgent,
-        );
-
-    // start by detecting iPads with touch enabled devices
-    if (
-        isTouchEnabledDevice &&
-        /iPad(?=.*(criOS|fxiOS|opiOS|chrome|android))/i.test(userAgent)
-    ) {
-        currentPlatform = 'ios';
-    }
-
-    if (isNotSafariAppleDevice) {
-        currentPlatform = 'ios';
     }
 
     if (
@@ -50,6 +31,11 @@ export function getCurrentPlatform(): ParsedPlatform | undefined {
     ) {
         // assert Safari after iOS to ensure we prefer Safari over non-Safari iOS browsers
         currentPlatform = 'safari';
+    } else if (
+        /(?:iPhone|iPad|iPod)/i.test(userAgent) ||
+        (hasManyTouchPoints && /Macintosh/i.test(userAgent)) // latest iPad OS looks like Macintosh but has touchpoints
+    ) {
+        currentPlatform = 'ios';
     }
 
     // undefined denotes an unsupported platform

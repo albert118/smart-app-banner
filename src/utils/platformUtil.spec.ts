@@ -34,8 +34,7 @@ describe('getCurrentPlatform', () => {
         'should return "android" for known Android userAgents',
         (testUserAgent: string) => {
             // @ts-ignore
-            window.navigator.userAgent = testUserAgent;
-            expect(getCurrentPlatform()).toBe('android');
+            expect(getCurrentPlatform(testUserAgent)).toBe('android');
         },
     );
 
@@ -47,24 +46,29 @@ describe('getCurrentPlatform', () => {
     ])(
         'should return "ios" when userAgent is an iOS mobile device NOT using Safari',
         (testUserAgent: string) => {
-            // @ts-ignore
-            window.navigator.userAgent = testUserAgent;
-            expect(getCurrentPlatform()).toBe('ios');
+            expect(getCurrentPlatform(testUserAgent)).toBe('ios');
         },
     );
 
-    // test.each([
-    //     // generic/simple UA
-    //     'Mozilla/5.0 (iPad; CPU OS 13_5_1)',
-    //     'Mozilla/5.0 (iPad16,3; CPU OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Tropicana_NJ/5.7.1',
-    // ])(
-    //     'should return "ios" when userAgent is an iPad',
-    //     (testUserAgent: string) => {
-    //         // @ts-ignore
-    //         window.navigator.userAgent = testUserAgent;
-    //         expect(getCurrentPlatform()).toBe('ios');
-    //     },
-    // );
+    test('should return "ios" when userAgent is an iPad using Chrome', () => {
+        const testUserAgent =
+            'Mozilla/5.0 (iPad; CPU OS 18_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/120.0.6099.119 Mobile/15E148 Safari/604.1';
+        expect(getCurrentPlatform(testUserAgent)).toBe('ios');
+    });
+
+    test('should return "safari" when userAgent is an iPad using Safari', () => {
+        const testUserAgent =
+            'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10';
+        expect(getCurrentPlatform(testUserAgent)).toBe('safari');
+    });
+
+    test('should return "ios" when userAgent is an iPad running iPad OS (Macintosh-like)', () => {
+        // @ts-ignore
+        window.navigator.maxTouchPoints = 5;
+        const testUserAgent =
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15';
+        expect(getCurrentPlatform(testUserAgent)).toBe('ios');
+    });
 
     test.each([
         // iPad OS 13 on Firefox
@@ -75,10 +79,8 @@ describe('getCurrentPlatform', () => {
         'should return "ios" for iPadOS 13+ device with maxTouchPoints NOT using Safari',
         (testUserAgent: string) => {
             // @ts-ignore
-            window.navigator.userAgent = testUserAgent;
-            // @ts-ignore
             window.navigator.maxTouchPoints = 5;
-            expect(getCurrentPlatform()).toBe('ios');
+            expect(getCurrentPlatform(testUserAgent)).toBe('ios');
         },
     );
 
@@ -92,9 +94,7 @@ describe('getCurrentPlatform', () => {
     ])(
         'should return "safari" when Safari iOS mobile devices',
         (testUserAgent: string) => {
-            // @ts-ignore
-            window.navigator.userAgent = testUserAgent;
-            expect(getCurrentPlatform()).toBe('safari');
+            expect(getCurrentPlatform(testUserAgent)).toBe('safari');
         },
     );
 
@@ -107,20 +107,17 @@ describe('getCurrentPlatform', () => {
     ])(
         'should return "undefined" when userAgent is a desktop environment (regardless if it contains "Safari")',
         (testUserAgent: string) => {
-            // @ts-ignore
-            window.navigator.userAgent = testUserAgent;
-            expect(getCurrentPlatform()).toBeUndefined();
+            expect(getCurrentPlatform(testUserAgent)).toBeUndefined();
         },
     );
 
     test('should not throw SmartAppBannerError when platform cannot be determined', () => {
-        // @ts-ignore
-        window.navigator.userAgent =
+        const bogusUserAgent =
             '23324758327580923798013 garbage !! df9 &^S%D$^R!F!*TGF | |A|WR B|AWR@#54 yA';
         // @ts-ignore
         window.navigator.maxTouchPoints = 0;
-        expect(() => getCurrentPlatform()).not.toThrow();
-        const result = getCurrentPlatform();
+        expect(() => getCurrentPlatform(bogusUserAgent)).not.toThrow();
+        const result = getCurrentPlatform(bogusUserAgent);
         expect(result).toBeUndefined();
     });
 });
