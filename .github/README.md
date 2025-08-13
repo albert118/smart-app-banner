@@ -106,7 +106,7 @@ $background-color: #000;
 
 ### Testing if your User Agent (UA) String is Valid
 
-UA strings are a dim a dozen, that's why in `verbose` mode (see [Configuration](#configuration)), the platform parsing utility is exposed to the window object for easy testing. In your browser console,
+UA strings are a dime a dozen, that's why in `verbose` mode (see [Configuration](#configuration)), the platform parsing utility is exposed to the window object for easy testing. In your browser console,
 
 ```sh
 const myUa = window.navigator.userAgent;
