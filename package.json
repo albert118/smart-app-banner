@@ -45,7 +45,7 @@
     "devDependencies": {
         "@types/jsdom": "^21.1.7",
         "@types/node": "^24.2.1",
-        "happy-dom": "^17.4.6",
+        "happy-dom": "^18.0.1",
         "jsdom": "^26.0.0",
         "prettier": "3.6.2",
         "rollup-plugin-copy": "^3.5.0",
