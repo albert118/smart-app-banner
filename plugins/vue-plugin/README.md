@@ -80,7 +80,7 @@ The next step would be to boot up the dependent project, as you're probably look
 4. Update any docs as needed
 5. Create the new version using `npm version major|minor|patch`
 6. Publish, review, and merge the branch
-7. Publish the latest plugin package to NPM using `npm publish --provenance --access public`
+7. Publish the latest plugin package to NPM using `npm publish --access public`
 
 ## Licence
 
