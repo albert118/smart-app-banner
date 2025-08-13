@@ -18,7 +18,7 @@ An Easy Smart App Banner for promoting mobile app installs based on the Safari A
 
 - Typescript support
 - Standalone/Frameworkless
-- Small! `16.60 kB │ gzip: 4.82 kB │ map: 55.09 kB`
+- Small! `14.72 kB │ gzip: 4.36 kB │ map: 52.03 kB`
 - Platform specific
   - custom banner for iOS (non-Safari) and Android user agents
   - ~~Safari specific config~~ See [Safari Support](#safari-support)
@@ -118,6 +118,15 @@ npm run test
 You can checkout the rest of the commands in the [package.json](./package.json).
 
 The next step would be to boot a demo project. Checkout the Vue demo [here](https://github.com/albert118/smart-app-banner/tree/master/demo/vue).
+
+### Publish a Release
+
+1. Checkout a new branch `release/major.minor.patch`
+2. Create the new version using `npm version major|minor|patch`
+3. Update the README's as needed (bump the size note)
+4. Publish the branch
+
+Having merged the PR for that branch, use GitHub and the configured GitHub Action to generate a release with a matching tag for the newly created version.
 
 ## Licence
 

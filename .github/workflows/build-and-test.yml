@@ -9,6 +9,7 @@ on:
             - ready_for_review
         paths:
             - 'src/**'
+            - 'package.json'
             - '.github/workflows/build-and-test.yml'
 jobs:
     build-and-test:
