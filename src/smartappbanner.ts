@@ -33,7 +33,14 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
 
         this.options = getSmartAppBannerOptions(options);
 
-        if (this.options.verbose) Logger.setLevel(Logger.DEBUG);
+        if (this.options.verbose) {
+            Logger.setLevel(Logger.DEBUG);
+            // add this function to the window for easier debugging
+            // @ts-ignore
+            window.getCurrentPlatform = undefined;
+            // @ts-ignore
+            window.getCurrentPlatform = getCurrentPlatform;
+        }
 
         this.platform = getCurrentPlatform();
 
@@ -89,6 +96,12 @@ export class SmartAppBanner extends TypedEventTarget<SmartAppBannerEvents> {
         this.removeEventListeners();
         this.__bannerElement.remove();
         Logger.debug('destroyed banner');
+
+        if (this.options.verbose) {
+            // @ts-ignore
+            window.getCurrentPlatform = undefined;
+        }
+
         this.dispatchEvent(new DestroyedEvent());
     }
 
