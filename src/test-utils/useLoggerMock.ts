@@ -16,14 +16,7 @@ export function createDefaultLogger(): Partial<ILogger> {
     };
 }
 
-export function useLoggerMock() {
-    function setMock() {
-        vi.mock('js-logger', async () => ({
-            default: createDefaultLogger(),
-        }));
-    }
-
-    return {
-        setMock,
-    };
-}
+// Importing this module mocks js-logger for the importing test run. vitest 5 requires vi.mock at the top level.
+vi.mock('js-logger', async () => ({
+    default: createDefaultLogger(),
+}));
