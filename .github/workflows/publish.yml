@@ -85,12 +85,14 @@ jobs:
                   done
                   echo "@easy-smart-app-banner/core@$core is not on the registry" >&2
                   exit 1
-            # The plugin lockfile can only pin the new core once it is published, so install it unsaved.
+            # The plugin lockfile can only pin the new core once it is published. Point the published
+            # package at the released core, then install without writing the lockfile.
             - name: Install dependencies against the new core
               if: ${{ !inputs.dry-run }}
               run: |
                   core=$(node -p "require('../../package.json').version")
-                  npm install --no-save --no-audit --no-fund "@easy-smart-app-banner/core@$core"
+                  npm pkg set "dependencies.@easy-smart-app-banner/core=^$core"
+                  npm install --no-save --no-audit --no-fund
             - name: Install dependencies from the lockfile
               if: ${{ inputs.dry-run }}
               run: npm ci
