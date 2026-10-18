@@ -43,7 +43,7 @@
         "js-logger": "^1.6.1"
     },
     "devDependencies": {
-        "@types/node": "^24.19.2",
+        "@types/node": "^26.6.5",
         "@typescript/typescript6": "^6.0.2",
         "happy-dom": "^21.0.3",
         "prettier": "3.9.10",
