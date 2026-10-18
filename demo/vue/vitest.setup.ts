@@ -1,5 +1,3 @@
-import '@utils/stringUtils'; // ensure extensions are implemented in tests
-
 /**
  * TL;DR WERROR for tests (block tests that throw warnings)
  */

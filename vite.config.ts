@@ -11,7 +11,8 @@ export default defineConfig({
     plugins: [
         // https://www.npmjs.com/package/vite-plugin-dts
         dts({
-            bundleTypes: true,
+            entryRoot: 'src',
+            insertTypesEntry: true,
             tsconfigPath: './tsconfig.app.json',
         }),
         // https://github.com/thednp/vite-plugin-strip-comments
