@@ -1,6 +1,6 @@
 # Easy Smart App Banner - Vue Plugin
 
-[![NPM version](https://img.shields.io/npm/v/smart-app-banner?color=e3e023&label=%22Easy%20Smart%20App%20Banner%22)](https://www.npmjs.com/package/@easy-smart-app-banner/core) [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
+[![NPM version](https://img.shields.io/npm/v/@easy-smart-app-banner/vue-plugin?logo=npm&color=e3e023)](https://www.npmjs.com/package/@easy-smart-app-banner/vue-plugin) [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 
 A Vue Plugin for [Smart App Banner](https://github.com/albert118/smart-app-banner).
 
@@ -9,6 +9,8 @@ A Vue Plugin for [Smart App Banner](https://github.com/albert118/smart-app-banne
 ```sh
 npm i -S @easy-smart-app-banner/vue-plugin
 ```
+
+`vue` (`^3.5.0`) is a peer dependency. Your app provides it.
 
 ---
 
@@ -74,14 +76,7 @@ The next step would be to boot up the dependent project, as you're probably look
 
 ### Publish a Release
 
-1. Checkout a new branch `release/vue-plugin-major.minor.patch`
-2. update the core package dependency (if needed) and run `npm i`
-3. execute `npm run build`
-4. Update any docs as needed
-5. Create the new version using `npm version major|minor|patch`
-6. Publish, review, and merge the branch
-7. Publish the latest plugin package to NPM using `npm publish --access public`
-8. Validate the install and version by bumping the [vue-demo](../../demo/vue/README.md) project
+The plugin is released together with core, by the `Publish Packages to npmjs` GitHub Action. See [Publish a Release](../../README.md#publish-a-release) in the repository README. Validate the install and version by bumping the [vue-demo](../../demo/vue/README.md) project afterwards.
 
 Done! 🎈
 
