@@ -28,12 +28,12 @@
         "type-check": "node ./node_modules/typescript/bin/tsc --project tsconfig.app.json --composite false --noEmit",
         "test": "vitest --watch false",
         "format": "prettier --write src/",
-        "clean": "rm -rf ./dist",
+        "clean": "node -e \"require('node:fs').rmSync('./dist', { recursive: true, force: true })\"",
         "prepack": "npm run build",
         "prepublishOnly": "npm run test"
     },
     "engines": {
-        "node": ">=20"
+        "node": ">=22"
     },
     "repository": {
         "type": "git",
