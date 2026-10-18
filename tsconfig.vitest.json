@@ -13,7 +13,6 @@
         "lib": [],
         "types": [
             "node",
-            "jsdom",
             "vitest/globals",
             "vitest/config",
             "vite/client"

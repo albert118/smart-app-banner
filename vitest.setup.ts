@@ -1,4 +1,4 @@
-import { useLoggerMock } from '@test-utils/useLoggerMock';
+import '@test-utils/useLoggerMock'; // mocks js-logger
 import '@utils/stringUtils'; // ensure extensions are implemented in tests
 
 /**
@@ -10,11 +10,8 @@ function throwOnWarnings() {
     };
 }
 
-const { setMock: setLoggerMock } = useLoggerMock();
-
 beforeEach(() => {
     vi.clearAllMocks();
 
     throwOnWarnings();
-    setLoggerMock();
 });
