@@ -1,0 +1,19 @@
+.github/dependabot.yml
+  s_1a2331912844a5::t_12cb934b7ad743 15-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c182fa7e6a233a3c6e45f660943399b1ee641b34",
+  "prompts": {},
+  "sessions": {
+    "s_1a2331912844a5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "s_1a2331912844a5",
+        "model": "unknown"
+      },
+      "human_author": "albertAtPropertyMe <albertferguson@propertyme.com>"
+    }
+  }
+}
