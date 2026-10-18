@@ -1,4 +1,4 @@
-# Build and test the core package
+# Build and test the core package, the Vue plugin and the Vue demo
 name: 'Build and Test'
 on:
     pull_request:
@@ -7,19 +7,62 @@ on:
             - synchronize
             - reopened
             - ready_for_review
-        paths:
-            - 'src/**'
-            - 'package.json'
-            - '.github/workflows/build-and-test.yml'
+    workflow_dispatch:
+
+concurrency:
+    group: build-and-test-${{ github.ref }}
+    cancel-in-progress: true
+
+permissions:
+    contents: read
+
 jobs:
-    build-and-test:
+    core:
+        name: core (node ${{ matrix.node-version }})
         runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                node-version: [22, 24]
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
+            - uses: actions/checkout@v7
+            - uses: actions/setup-node@v7
               with:
-                  node-version-file: '.node-version'
+                  node-version: ${{ matrix.node-version }}
                   cache: 'npm'
             - run: npm ci
             - run: npm run build
             - run: npm test
+
+    vue-plugin:
+        name: vue-plugin
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: plugins/vue-plugin
+        steps:
+            - uses: actions/checkout@v7
+            - uses: actions/setup-node@v7
+              with:
+                  node-version-file: '.node-version'
+                  cache: 'npm'
+                  cache-dependency-path: plugins/vue-plugin/package-lock.json
+            - run: npm ci
+            - run: npm run build
+            - run: npm test
+
+    demo:
+        name: vue demo
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: demo/vue
+        steps:
+            - uses: actions/checkout@v7
+            - uses: actions/setup-node@v7
+              with:
+                  node-version-file: '.node-version'
+                  cache: 'npm'
+                  cache-dependency-path: demo/vue/package-lock.json
+            - run: npm ci
+            - run: npm run build

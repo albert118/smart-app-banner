@@ -15,4 +15,4 @@ changelog:
         - title: 🏡 Housekeeping
           labels:
               - dependencies
-              - documenation
+              - documentation
