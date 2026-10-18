@@ -1,0 +1,35 @@
+package.json
+  s_612d8f58c3bb33::t_50d71d6895aad5 31
+  s_612d8f58c3bb33::t_438a329afd2a3e 36
+plugins/vue-plugin/package.json
+  s_612d8f58c3bb33::t_5f0f4702bc2975 31
+  s_612d8f58c3bb33::t_dc2b758c92481e 35,39-40,44-47
+  s_612d8f58c3bb33::t_494935cc9fe49e 61
+.node-version
+  s_612d8f58c3bb33::t_2adc9da6815add 1
+demo/vue/package.json
+  s_612d8f58c3bb33::t_bccfb67166f50c 22
+  s_612d8f58c3bb33::t_20e72b7aa2bf4f 15
+plugins/vue-plugin/vite.config.ts
+  s_612d8f58c3bb33::t_cff728c0c728cc 59-62
+package-lock.json
+  s_612d8f58c3bb33::t_80a25c62d4daf0 28
+plugins/vue-plugin/package-lock.json
+  s_612d8f58c3bb33::t_9a8aff8e464bb8 13,27,31-34,69,79,89,105,184,1098,1112,1123,1141,1168,1178,1189,1202,1214,1440,1485,1508,2106,2178,2249,2281,2878,2994,3256
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8f796e3774cb16e27269e9280e4c6592fa1afb0c",
+  "prompts": {},
+  "sessions": {
+    "s_612d8f58c3bb33": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "54010160-60a1-4333-9a80-d90aadce1e88",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "albertAtPropertyMe <albertferguson@propertyme.com>"
+    }
+  }
+}
