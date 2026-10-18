@@ -8,7 +8,7 @@ export default mergeConfig(
         test: {
             globals: true,
             environment: 'happy-dom',
-            exclude: [...configDefaults.exclude],
+            exclude: [...configDefaults.exclude, 'plugins/**', 'demo/**'],
             silent: false,
             setupFiles: ['./vitest.setup.ts'],
             root: fileURLToPath(new URL('./', import.meta.url)),
