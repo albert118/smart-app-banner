@@ -12,14 +12,14 @@
         "type-check": "vue-tsc --project tsconfig.app.json --composite false --noEmit",
         "test": "vitest --watch false",
         "format": "prettier --write src/",
-        "clean": "rm -rf ./dist"
+        "clean": "node -e \"require('node:fs').rmSync('./dist', { recursive: true, force: true })\""
     },
     "author": "Albert Ferguson <albertferguson118@gmail.com>",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/albert118/smart-app-banner/issues"
     },
-    "private": false,
+    "private": true,
     "dependencies": {
         "@easy-smart-app-banner/vue-plugin": "^2.1.1",
         "@vueuse/core": "^13.0.0",

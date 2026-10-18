@@ -28,21 +28,23 @@
         "type-check": "vue-tsc --project tsconfig.app.json --composite false --noEmit",
         "test": "echo No tests found!",
         "format": "prettier --write src/",
-        "clean": "rm -rf ./dist",
+        "clean": "node -e \"require('node:fs').rmSync('./dist', { recursive: true, force: true })\"",
         "prepack": "npm run clean && npm run build"
     },
     "engines": {
-        "node": ">=20"
+        "node": ">=22"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/albert118/smart-app-banner.git"
+        "url": "git+https://github.com/albert118/smart-app-banner.git",
+        "directory": "plugins/vue-plugin"
     },
     "dependencies": {
         "@easy-smart-app-banner/core": "^2.1.1",
-        "@vueuse/core": "^15.0.0",
-        "js-logger": "^1.6.1",
-        "vue": "^3.5.44"
+        "js-logger": "^1.6.1"
+    },
+    "peerDependencies": {
+        "vue": "^3.5.0"
     },
     "devDependencies": {
         "@microsoft/api-extractor": "^7.59.4",
@@ -56,6 +58,7 @@
         "vite-plugin-dts": "^5.1.2",
         "vite-plugin-static-copy": "^4.1.1",
         "vite-plugin-strip-comments": "^0.0.10",
+        "vue": "^3.5.44",
         "vue-tsc": "^3.3.13"
     },
     "keywords": [

@@ -56,5 +56,9 @@ export default defineConfig({
             fileName: 'index',
             cssFileName: 'styles',
         },
+        rolldownOptions: {
+            // vue is a peer dependency, the host app provides it
+            external: ['vue'],
+        },
     },
 });
