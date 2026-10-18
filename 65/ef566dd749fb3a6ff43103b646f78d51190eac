@@ -1,0 +1,25 @@
+package-lock.json
+  s_612d8f58c3bb33::t_39387d775bf2a6 3,9
+package.json
+  s_612d8f58c3bb33::t_d553a6dbbaf0d6 11
+plugins/vue-plugin/package-lock.json
+  s_612d8f58c3bb33::t_1f5219815891e5 3,9
+plugins/vue-plugin/package.json
+  s_612d8f58c3bb33::t_b9583ddf9fe23e 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "65ef566dd749fb3a6ff43103b646f78d51190eac",
+  "prompts": {},
+  "sessions": {
+    "s_612d8f58c3bb33": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "54010160-60a1-4333-9a80-d90aadce1e88",
+        "model": "unknown"
+      },
+      "human_author": "albertAtPropertyMe <albertferguson@propertyme.com>"
+    }
+  }
+}
