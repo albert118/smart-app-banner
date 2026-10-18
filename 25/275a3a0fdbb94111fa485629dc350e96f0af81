@@ -1,0 +1,19 @@
+.github/dependabot.yml
+  s_612d8f58c3bb33::t_3603990cb7c8b3 6-10,16-20,26-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "25275a3a0fdbb94111fa485629dc350e96f0af81",
+  "prompts": {},
+  "sessions": {
+    "s_612d8f58c3bb33": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "54010160-60a1-4333-9a80-d90aadce1e88",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "albertAtPropertyMe <albertferguson@propertyme.com>"
+    }
+  }
+}
