@@ -1,0 +1,36 @@
+.github/README.md
+  s_612d8f58c3bb33::t_3efd7855e9b4e9 90
+  s_612d8f58c3bb33::t_228a8ce1a21dfa 135-136,138,140-143
+  s_612d8f58c3bb33::t_229e394c9c43a4 120
+  s_612d8f58c3bb33::t_9bf2fbf7b98729 38
+  s_612d8f58c3bb33::t_1b929db0714a88 95
+  s_612d8f58c3bb33::t_17ab5e87c239c8 21
+README.md
+  s_612d8f58c3bb33::t_b2be25ddb72e1d 86
+  s_612d8f58c3bb33::t_7fb01184bcd376 36
+  s_612d8f58c3bb33::t_cfa27e7285b892 131-132,134,136-139
+  s_612d8f58c3bb33::t_af487168741d3f 3
+  s_612d8f58c3bb33::t_34cd6dc76f1075 19
+  s_612d8f58c3bb33::t_0333830fac53dc 91
+  s_612d8f58c3bb33::t_213c285b4b0480 116
+plugins/vue-plugin/README.md
+  s_612d8f58c3bb33::t_c4b573b31265b7 3
+  s_612d8f58c3bb33::t_e183f08bddc2d0 79
+  s_612d8f58c3bb33::t_7b23795c8061b5 13-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "91c843e2867f5b03143edfaf57831f17afbfb72f",
+  "prompts": {},
+  "sessions": {
+    "s_612d8f58c3bb33": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "54010160-60a1-4333-9a80-d90aadce1e88",
+        "model": "unknown"
+      },
+      "human_author": "albertAtPropertyMe <albertferguson@propertyme.com>"
+    }
+  }
+}
