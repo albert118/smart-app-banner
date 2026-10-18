@@ -1,0 +1,26 @@
+plugins/vue-plugin/vitest.config.ts
+  s_612d8f58c3bb33::t_223f326faa76cd 1-8
+plugins/vue-plugin/src/smartAppBannerPlugin.spec.ts
+  s_612d8f58c3bb33::t_5305a81de9c96a 1-109
+plugins/vue-plugin/package.json
+  s_612d8f58c3bb33::t_cf1ea7a6379907 29
+  s_612d8f58c3bb33::t_34d7cdc56d673e 61
+plugins/vue-plugin/package-lock.json
+  s_612d8f58c3bb33::t_e4902033e589a3 27,1015-1032,1084-1141,1401-1410,1473-1482,1601-1607,1615-1624,2325-2338,3019-3025,3088-3107,3400-3492,3546-3558
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "86d5baa89ed1cc6ffb826012352d3248863986b2",
+  "prompts": {},
+  "sessions": {
+    "s_612d8f58c3bb33": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "54010160-60a1-4333-9a80-d90aadce1e88",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "albertAtPropertyMe <albertferguson@propertyme.com>"
+    }
+  }
+}
