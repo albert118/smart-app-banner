@@ -1,0 +1,23 @@
+.github/workflows/build-and-test.yml
+  s_612d8f58c3bb33::t_e2c33f82a87d5f 1,10-18,20-21,23-26,28-45,49,53-68
+.github/workflows/labeler.yml
+  s_612d8f58c3bb33::t_9284d697e3f282 16
+.github/release.yml
+  s_612d8f58c3bb33::t_0c01e1aabdb377 18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cbacff77797125af87f6de8c3d238ffc22c2909a",
+  "prompts": {},
+  "sessions": {
+    "s_612d8f58c3bb33": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "54010160-60a1-4333-9a80-d90aadce1e88",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "albertAtPropertyMe <albertferguson@propertyme.com>"
+    }
+  }
+}
