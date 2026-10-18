@@ -3,7 +3,7 @@ import tsconfig from './tsconfig.app.json';
 import path from 'path';
 import dts from 'vite-plugin-dts';
 import stripComments from 'vite-plugin-strip-comments';
-import copy from 'rollup-plugin-copy';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { normalizePath } from 'vite';
 
 // https://vite.dev/config/
@@ -11,39 +11,42 @@ export default defineConfig({
     plugins: [
         // https://www.npmjs.com/package/vite-plugin-dts
         dts({
-            rollupTypes: true,
+            bundleTypes: true,
             tsconfigPath: './tsconfig.app.json',
         }),
         // https://github.com/thednp/vite-plugin-strip-comments
         stripComments({ type: 'keep-legal' }),
         // https://www.npmjs.com/package/vite-plugin-static-copy
-        copy({
+        viteStaticCopy({
             targets: [
                 // meta
                 {
                     src: './LICENSE',
-                    dest: `dist`,
+                    dest: '.',
+                    rename: { stripBase: true },
                 },
                 {
                     src: './README.md',
-                    dest: `dist`,
+                    dest: '.',
+                    rename: { stripBase: true },
                 },
                 {
                     src: './package.json',
-                    dest: `dist`,
+                    dest: '.',
+                    rename: { stripBase: true },
                 },
                 // SCSS/Sass
                 {
                     src: 'src/styles/styles.scss',
-                    dest: 'dist',
+                    dest: '.',
+                    rename: { stripBase: true },
                 },
                 {
                     src: 'src/styles/variables.scss',
-                    dest: 'dist',
+                    dest: '.',
+                    rename: { stripBase: true },
                 },
             ],
-            // ensure it runs after bundle is written
-            hook: 'writeBundle',
         }),
     ],
     build: {
