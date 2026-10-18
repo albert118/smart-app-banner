@@ -1,0 +1,34 @@
+tsconfig.app.json
+  s_612d8f58c3bb33::t_c46133eb4372c6 33
+vite.config.ts
+  s_612d8f58c3bb33::t_0f82ec67a16b01 14-15
+package.json
+  s_612d8f58c3bb33::t_c594cc6964b545 28
+  s_612d8f58c3bb33::t_a0e5e8359f0c6a 43,47,51
+demo/vue/package-lock.json
+  s_612d8f58c3bb33::t_e4c3c4dc448a35 26,556-568,585-597,3693-3696
+demo/vue/package.json
+  s_612d8f58c3bb33::t_7964c22f490fb1 38
+package-lock.json
+  s_612d8f58c3bb33::t_ffc56646a0004e 12,16,20,713-716,720-721,724-741,745,748-758,761,765-769,771-774,777,780-786,788-792,794,797-803,805-809,811,814-820,822-829,831-837,839-845,848-1058,1060-1067,1069-1075,1077-1084,1086-1092,1094-1100,1103-1109,1111-1118,1120-1123,1125,1127-1130,2711-2713,2717,2720-2742
+plugins/vue-plugin/package-lock.json
+  s_612d8f58c3bb33::t_a04900485c6007 24,129-141,234-247,3020-3023
+plugins/vue-plugin/package.json
+  s_612d8f58c3bb33::t_98d9992d3215ed 54
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "32ec5a8a4184f6bbbf89eb24cd782462158c3198",
+  "prompts": {},
+  "sessions": {
+    "s_612d8f58c3bb33": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "54010160-60a1-4333-9a80-d90aadce1e88",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "albertAtPropertyMe <albertferguson@propertyme.com>"
+    }
+  }
+}
