@@ -1,21 +1,100 @@
-name: 'Publish Core Package to npmjs'
+# Publish the core package and the Vue plugin to npmjs when a GitHub release is published.
+# Run manually with dry-run enabled (the default) to check packaging without publishing.
+name: 'Publish Packages to npmjs'
 on:
     release:
         types: [published]
+    workflow_dispatch:
+        inputs:
+            dry-run:
+                description: 'Pack and validate without publishing'
+                type: boolean
+                default: true
+
+permissions:
+    contents: read
+
 jobs:
-    build:
+    verify:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v7
+            - uses: actions/setup-node@v7
+              with:
+                  node-version-file: '.node-version'
+                  cache: 'npm'
+            - name: Check the release tag matches both package versions
+              if: github.event_name == 'release'
+              env:
+                  RELEASE_TAG: ${{ github.event.release.tag_name }}
+              run: |
+                  core=$(node -p "require('./package.json').version")
+                  plugin=$(node -p "require('./plugins/vue-plugin/package.json').version")
+                  if [ "v$core" != "$RELEASE_TAG" ] || [ "v$plugin" != "$RELEASE_TAG" ]; then
+                      echo "Tag $RELEASE_TAG does not match core ($core) and plugin ($plugin)" >&2
+                      exit 1
+                  fi
+            - run: npm ci
+            - run: npm run build
+            - run: npm test
+
+    publish-core:
+        needs: verify
         runs-on: ubuntu-latest
         permissions:
             contents: read
             id-token: write
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
+            - uses: actions/checkout@v7
+            - uses: actions/setup-node@v7
               with:
                   node-version-file: '.node-version'
                   cache: 'npm'
                   registry-url: 'https://registry.npmjs.org'
             - run: npm ci
-            - run: npm publish --provenance --access public
+            - run: npm publish --provenance --access public ${{ inputs.dry-run && '--dry-run' || '' }}
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    publish-plugin:
+        needs: publish-core
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            id-token: write
+        defaults:
+            run:
+                working-directory: plugins/vue-plugin
+        steps:
+            - uses: actions/checkout@v7
+            - uses: actions/setup-node@v7
+              with:
+                  node-version-file: '.node-version'
+                  cache: 'npm'
+                  cache-dependency-path: plugins/vue-plugin/package-lock.json
+                  registry-url: 'https://registry.npmjs.org'
+            - name: Wait for the matching core version on the registry
+              if: ${{ !inputs.dry-run }}
+              run: |
+                  core=$(node -p "require('../../package.json').version")
+                  for attempt in $(seq 1 30); do
+                      if npm view "@easy-smart-app-banner/core@$core" version >/dev/null 2>&1; then
+                          exit 0
+                      fi
+                      sleep 10
+                  done
+                  echo "@easy-smart-app-banner/core@$core is not on the registry" >&2
+                  exit 1
+            # The plugin lockfile can only pin the new core once it is published, so install it unsaved.
+            - name: Install dependencies against the new core
+              if: ${{ !inputs.dry-run }}
+              run: |
+                  core=$(node -p "require('../../package.json').version")
+                  npm install --no-save --no-audit --no-fund "@easy-smart-app-banner/core@$core"
+            - name: Install dependencies from the lockfile
+              if: ${{ inputs.dry-run }}
+              run: npm ci
+            - run: npm run build
+            - run: npm publish --provenance --access public ${{ inputs.dry-run && '--dry-run' || '' }}
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
