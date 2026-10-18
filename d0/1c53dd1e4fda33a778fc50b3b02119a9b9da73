@@ -1,0 +1,19 @@
+.github/workflows/publish.yml
+  s_612d8f58c3bb33::t_0597f07891804e 88-89,94-95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d01c53dd1e4fda33a778fc50b3b02119a9b9da73",
+  "prompts": {},
+  "sessions": {
+    "s_612d8f58c3bb33": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "54010160-60a1-4333-9a80-d90aadce1e88",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "albertAtPropertyMe <albertferguson@propertyme.com>"
+    }
+  }
+}
