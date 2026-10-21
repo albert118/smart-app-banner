@@ -53,8 +53,6 @@ jobs:
                   registry-url: 'https://registry.npmjs.org'
             - run: npm ci
             - run: npm publish --provenance --access public ${{ inputs.dry-run && '--dry-run' || '' }}
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     publish-plugin:
         needs: publish-core
@@ -98,5 +96,3 @@ jobs:
               run: npm ci
             - run: npm run build
             - run: npm publish --provenance --access public ${{ inputs.dry-run && '--dry-run' || '' }}
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
