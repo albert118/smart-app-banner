@@ -1,0 +1,21 @@
+demo/vue/package-lock.json
+  s_ee2a4e79539a3f::t_ce30eddf9407ec 12,544-546,549,552,556-558,561-562,565
+demo/vue/package.json
+  s_ee2a4e79539a3f::t_9d7afbfcebdcf1 24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b1313a6b6b2536ea797073a27e646b7999c49062",
+  "prompts": {},
+  "sessions": {
+    "s_ee2a4e79539a3f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "s_ee2a4e79539a3f",
+        "model": "unknown"
+      },
+      "human_author": "albertAtPropertyMe <albertferguson@propertyme.com>"
+    }
+  }
+}
